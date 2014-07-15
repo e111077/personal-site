@@ -81,8 +81,8 @@ object {
     cursor: pointer;
     cursor: hand;
     vertical-align: middle !important;
-    max-width: 300px;
-    max-height: 300px;
+    max-width: 250px;
+    max-height: 250px;
 }
 
 .modal img {
