@@ -1,39 +1,38 @@
-$( document ).ready(function() {
-    $(function(){
-        var menuItem = $('.menu .item');
-        
-        var hoverOn = function() {
-            if(!$(this).hasClass('main')) {
-                $(this).addClass('active');
-            }
-        };
-        
-        var hoverOff = function() {
-            if(!$(this).hasClass('main')) {
-                $(this).removeClass('active');
-            }
-        };
-        
-        menuItem.hover(hoverOn, hoverOff);
-    });
-    
-    $("#github").mouseup(function () {
-        $(".github.modal").modal("show");
-    });
-    
-    $("#vsafe").mouseup(function () {
-        $(".vsafe.modal").modal("show");
-    });
-    
-    $("#wsiia").mouseup(function () {
-        $(".wsiia.modal").modal("show");
-    });
-    
-    $("#mitml").mouseup(function () {
-        $(".mitml.modal").modal("show");
-    });
-    
-    $("#microsoft").mouseup(function () {
-        $(".microsoft.modal").modal("show");
-    });
+function modals (projectName) {
+  'use strict';
+  $('.' + projectName + '.modal').modal('show');
+}
+
+$(function () {
+  'use strict';
+  var lastUpdated, $items;
+  lastUpdated = "December 2014";
+  $('#lastUpdated').html("Last updated " + lastUpdated + ".");
+  
+  $items = $('.menu .item');
+
+  $items.on('click', function () {
+    var $this, $bodyContent, newSection, $activeContent, $newContent;
+    $this = $(this);
+
+    if (!$this.hasClass('main')) {
+      $bodyContent = $('.content .bodyContent.animating');
+
+      if ($bodyContent.length !== 0) {
+        return;
+      }
+
+      $items.removeClass('active');
+      $items.removeClass('main');
+      $this.addClass('active');
+      $this.addClass('main');
+
+      newSection = $this.attr('value');
+      $activeContent = $('.content .bodyContent').not('.hidden');
+      $newContent = $('.content .bodyContent.' + newSection);
+      $activeContent.transition('slide down', function () {
+        $newContent.transition('slide down');
+      });
+    }
+  });
 });

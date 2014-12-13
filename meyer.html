@@ -1,3 +1,52 @@
-<html>
-	<a href=http://people.csail.mit.edu/meyer/MayerA_PortraitSimple152752.jpg><img src="images/meCreepy.jpg" alt="You know you want to see more" width="100%"/></a>
-</html>
+<head>
+  <style type="text/css">
+    body {
+      margin:0;
+    }
+
+    img {
+      width:100%;
+    }
+
+    @-webkit-keyframes spinnerRotate {
+        from{-webkit-transform:rotate(0deg);}
+        to{-webkit-transform:rotate(360deg);}
+    }
+    @-moz-keyframes spinnerRotate {
+        from{-moz-transform:rotate(0deg);}
+        to{-moz-transform:rotate(360deg);}
+    }
+    @-ms-keyframes spinnerRotate {
+        from{-ms-transform:rotate(0deg);}
+        to{-ms-transform:rotate(360deg);}
+    }
+
+    #more {
+      position: fixed;
+      top: 50%;
+      left: 25%;
+      white-space: nowrap;
+      overflow: hidden;
+      font-size: 4em;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      -webkit-animation-name: spinnerRotate;
+      -webkit-animation-duration: 5s;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-timing-function: linear;
+      -moz-animation-name: spinnerRotate;
+      -moz-animation-duration: 5s;
+      -moz-animation-iteration-count: infinite;
+      -moz-animation-timing-function: linear;
+      -ms-animation-name: spinnerRotate;
+      -ms-animation-duration: 5s;
+      -ms-animation-iteration-count: infinite;
+      -ms-animation-timing-function: linear;
+    }
+  </style>
+</head>
+<body>
+  <a href="http://people.csail.mit.edu/meyer/MayerA_PortraitSimple152752.jpg">
+    <img src="images/meCreepy.jpg">
+    <div id="more" class="wrap"><span style="color:#ff0000;">Y</span><span style="color:#ff2000;">O</span><span style="color:#ff4000;">U</span><span style="color:#ff5f00;"> </span><span style="color:#ff7f00;">W</span><span style="color:#ff9900;">A</span><span style="color:#ffb200;">N</span><span style="color:#ffcc00;">T</span><span style="color:#ffe500;">E</span><span style="color:#ffff00;">D</span><span style="color:#bfff00;"> </span><span style="color:#80ff00;">T</span><span style="color:#40ff00;">O</span><span style="color:#00ff00;"> </span><span style="color:#00ff33;">S</span><span style="color:#00ff66;">E</span><span style="color:#00ff99;">E</span><span style="color:#00ffcc;"> </span><span style="color:#00ffff;">M</span><span style="color:#00bfff;">O</span><span style="color:#0080ff;">R</span><span style="color:#0040ff;">E</span><span style="color:#0000ff;">?</span></div>
+  </a>
+</body>
