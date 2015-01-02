@@ -117,6 +117,6 @@ body {
   vertical-align: middle !important;
 }
 
-.ui.raised.segment {
+.ui.raised.segment, .shadowed {
   box-shadow: 0 0 0 1px rgba(39,41,43,.15),4px 4px 4px 0 rgba(0,0,0,.15) !important;
 }

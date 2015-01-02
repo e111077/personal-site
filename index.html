@@ -27,7 +27,7 @@
       
       <!-- Navbar -->
       <div class="wrap navbar">
-        <div class="ui centered wrap menu">
+        <div class="ui centered wrap shadowed menu">
           <a class="active main red item" value="about">
             <i class="ui red user icon"></i>
             About Me
@@ -81,6 +81,16 @@
       <!-- Projects -->
       <div class="ui hidden bodyContent projects">
         <div class="wrap gallery">
+          <a class="ui wrap raised segment" onclick="modals('shiftshark')">
+            <img src="images/shiftshark.png" alt="ShiftShark">
+          </a>
+        </div>
+        <div class="wrap gallery">
+          <a class="ui wrap raised segment" onclick="modals('amazejobs')">
+            <img src="images/hashrocket.png" alt="Amazejobs">
+          </a>
+        </div>
+        <div class="wrap gallery">
           <a class="ui wrap raised segment" onclick="modals('microsoft')">
             <img src="images/microsoft.png" alt="Microsoft">
           </a>
@@ -117,6 +127,50 @@
 
       <!-- Modals -->
       <div class="modals">
+        <!-- ShiftShark -->
+        <div class="ui modal shiftshark">
+          <i class="close icon"></i>
+          <div class="huge header">
+            ShiftShark
+          </div>
+          <div class="content">
+            <div class="ui medium image">
+              <a class="imageWrapper" href="shiftshark-aandre.rhcloud.com">
+                <img src="images/shiftshark.png">
+              </a>
+            </div>
+            <div class="description">
+              <div class="ui header">MIT <a href="http://student.mit.edu/catalog/m6a.html#6.170">6.170</a> Final Project</div>
+              <p></p>
+              <p>Shiftshark was a 5 week project for my software design class. I worked with my team of 4 to design, present, and implement our idea. ShiftShark is a scheduling application that attempts to focus on ease of use for employers and trading for employees.</p>
+              <p>Technologies used in the project are MongoDB, MongooseJS, NodeJS, ExpressJS, PassportJS, HandlebarsJS, Embedded Javascript, MomentJS, fancyBox, and Semantic UI.</p>
+              <p>The site can be found <a href="shiftshark-aandre.rhcloud.com">here</a> and the source can be found <a href="https://github.com/shiftshark/shiftshark">here</a>.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Amazejobs -->
+        <div class="ui modal amazejobs">
+          <i class="close icon"></i>
+          <div class="huge header">
+            Amazejobs by Team Hashrocket
+          </div>
+          <div class="content">
+            <div class="ui medium image">
+              <a class="imageWrapper" href="http://amazejobs-hashrocket.rhcloud.com/">
+                <img src="images/hashrocket.png">
+              </a>
+            </div>
+            <div class="description">
+              <div class="ui header">MIT <a href="http://student.mit.edu/catalog/m6a.html#6.170">6.170</a> Small Project</div>
+              <p></p>
+              <p>Shiftshark was a 4 week project for my software design class. I worked with my team of 4 to design and implement our idea. Amazejobs is a job application task manager that was inspired by intern application season.</p>
+              <p>Technologies used in the project are MongoDB, MongooseJS, NodeJS, ExpressJS, HandlebarsJS, Embedded Javascript, MomentJS, Google OAuth, and Semantic UI.</p>
+              <p>The site can be found <a href="http://amazejobs-hashrocket.rhcloud.com/">here</a> and the source can be found <a href="https://github.com/TeamHashrocket/AmazeJobs">here</a>.</p>
+            </div>
+          </div>
+        </div>
+
         <!-- Microsoft -->
         <div class="ui modal microsoft">
           <i class="close icon"></i>
