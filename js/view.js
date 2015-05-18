@@ -1,12 +1,14 @@
 $(function () {
   'use strict';
-  var lastUpdated, $items;
-  lastUpdated = "December 2014";
+
+  var lastUpdated = "December 2014";
+
   $('#lastUpdated').html("Last updated " + lastUpdated + ".");
   
-  $items = $('.menu .item');
+  var $items = $('.menu .item');
+  var $logo  = $('#logo');
 
-  $items.on('click', function () {
+  var navFunction = function () {
     var $this, $bodyContent, newSection, $activeContent, $newContent;
     $this = $(this);
 
@@ -29,5 +31,8 @@ $(function () {
         $newContent.transition('slide down');
       });
     }
-  });
+  };
+
+  $items.on('click', navFunction);
+  $logo.on('click', function() {$('.menu .item[value="about"]').click()});
 });

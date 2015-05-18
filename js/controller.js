@@ -11,7 +11,7 @@ function($scope, $sce) {
   var projects = [
     {
       name  : 'ShiftShark',
-      title : 'ShiftShark',
+      title : 'ShiftShark Easy Scheduling',
       img   : '/images/shiftshark.png',
       link  : 'http://shiftshark-aandre.rhcloud.com',
       head  : 'MIT <a href="http://student.mit.edu/catalog/m6a.html#6.170">6.170</a> Final Project',
@@ -27,7 +27,7 @@ function($scope, $sce) {
     },
     {
       name  : 'Microsoft',
-      title : 'Microsoft',
+      title : 'Microsoft Summer Internship',
       img   : '/images/microsoft.png',
       link  : 'http://www.bing.com/',
       head  : 'Bing Internship',
@@ -35,7 +35,7 @@ function($scope, $sce) {
     },
     {
       name  : 'wsiia',
-      title : 'What Song is it Anyway',
+      title : 'What Song is it Anyway Android App',
       img   : '/images/wsiia.png',
       link  : 'https://play.google.com/store/apps/details?id=com.wsiia',
       head  : 'MIT <a class="link" href="http://web.mit.edu/21w.789/www/">21w.789</a> Communicating with Mobile Technology',
@@ -43,7 +43,7 @@ function($scope, $sce) {
     },
     {
       name  : 'mitml',
-      title : 'MIT Media Lab',
+      title : 'MIT Media Lab Undergraduate Research',
       img   : '/images/mitml.png',
       link  : 'http://media.mit.edu',
       head  : '<a class="link" href="http://resenv.media.mit.edu/">Responsive Environments</a> Group',
@@ -51,7 +51,7 @@ function($scope, $sce) {
     },
     {
       name  : 'vSafe',
-      title : 'vSafe',
+      title : 'vSafe VEGetariAN Helper Web App',
       img   : '/images/vsafe.png',
       link  : 'http://aandre.scripts.mit.edu/vsafe/',
       head  : 'MIT <a href="http://student.mit.edu/catalog/m6a.html#6.170">6.170</a> Final Project',
@@ -59,7 +59,7 @@ function($scope, $sce) {
     },
     {
       name  : 'Github',
-      title : 'Github',
+      title : 'View My Github',
       img   : '/images/github.png',
       link  : 'https://www.github.com/e111077',
       head  : 'E111077',
@@ -74,7 +74,6 @@ function($scope, $sce) {
 
     project.head = $sce.trustAsHtml(project.head);
     project.desc = $sce.trustAsHtml(project.desc);
-    console.log(project);
 
     $scope.projects.push(project);
   }
