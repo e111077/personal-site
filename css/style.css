@@ -24,7 +24,7 @@ body {
   width: 55%;
   padding-top: 1em;
   padding-bottom: 2em;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .head .menu .item {
@@ -53,15 +53,10 @@ body {
   font-weight: 400;
 }
 
-.ctitle, .content {
-  font-family: 'Open Sans', sans-serif;
-}
-
 .ntitle {
   width: 45%;
   font-size: 40px;
-  font-weight: 100;
-  font-family: 'Lato', sans-serif;
+  font-weight: 300;
   padding-left: .5em;
 }
 
@@ -86,11 +81,12 @@ body {
 }
 
 .content a {
-  color: #808080;
+  color: #0288d1;
+  transition: all .2s ease-in-out;
 }
 
 .content a:hover {
-  color: #959595;
+  color: #000000;
 }
 
 .profile img {
