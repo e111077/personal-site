@@ -1,8 +1,3 @@
-function modals (projectName) {
-  'use strict';
-  $('.' + projectName + '.modal').modal('show');
-}
-
 $(function () {
   'use strict';
   var lastUpdated, $items;

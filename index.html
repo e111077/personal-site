@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html ng-app="personalSite">
   <head>
     <title>Elliott Marquez</title>
     <link rel="icon" 
@@ -7,6 +7,8 @@
       href="images/favicon.ico">
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <!-- Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
     <!-- Semantic -->
     <script src="lib/semantic/semantic.min.js"></script>
     <link rel="stylesheet" href="lib/semantic/semantic.min.css" type="text/css" />
@@ -14,7 +16,10 @@
     <link href="http://fonts.googleapis.com/css?family=Lato:300|Open+Sans:400,700" rel="stylesheet" type="text/css">
     <!-- Styling -->
     <link rel="stylesheet" href="css/style.css" type="text/css" />
-    <script src="js/main.js"></script>
+    <!-- Angular Files -->
+    <script src="js/controller.js"></script>
+    <!-- Functionality js -->
+    <script src="js/view.js"></script>
   </head>
   <body>
     <!-- Header -->
@@ -79,40 +84,10 @@
       </div>
 
       <!-- Projects -->
-      <div class="ui hidden bodyContent projects">
-        <div class="wrap gallery">
-          <a class="ui wrap raised segment" onclick="modals('shiftshark')">
-            <img src="images/shiftshark.png" alt="ShiftShark">
-          </a>
-        </div>
-        <div class="wrap gallery">
-          <a class="ui wrap raised segment" onclick="modals('amazejobs')">
-            <img src="images/hashrocket.png" alt="Amazejobs">
-          </a>
-        </div>
-        <div class="wrap gallery">
-          <a class="ui wrap raised segment" onclick="modals('microsoft')">
-            <img src="images/microsoft.png" alt="Microsoft">
-          </a>
-        </div>
-        <div class="wrap gallery">
-          <a class="ui wrap raised segment" onclick="modals('wsiia')">
-            <img src="images/wsiia.png" alt="What song is it anyway">
-          </a>
-        </div>
-        <div class="wrap gallery">
-          <a class="ui wrap raised segment" onclick="modals('mitml')">
-            <img src="images/mitml.png" alt="MIT Media Lab">
-          </a>
-        </div>
-        <div class="wrap gallery">
-          <a class="ui wrap raised segment" onclick="modals('vsafe')">
-            <img src="images/vsafe.png" alt="vSafe">
-          </a>
-        </div>
-        <div class="wrap gallery">
-          <a class="ui wrap raised segment" onclick="modals('github')">
-            <img src="images/github.png" alt="github">
+      <div class="ui hidden bodyContent projects" ng-controller="projectsController">
+        <div class="wrap gallery" ng-repeat="project in projects">
+          <a class="ui wrap raised segment" ng-click="modals(project.name)">
+            <img ng-src="{{project.img}}" alt="{{project.title}}">
           </a>
         </div>
       </div>
@@ -126,157 +101,25 @@
       </div>
 
       <!-- Modals -->
-      <div class="modals">
+      <div class="modals" ng-controller="projectsController">
         <!-- ShiftShark -->
-        <div class="ui modal shiftshark">
+        <div class="ui modal {{project.name}}" ng-repeat="project in projects">
           <i class="close icon"></i>
           <div class="huge header">
-            ShiftShark
+            {{project.title}}
           </div>
           <div class="content">
             <div class="ui medium image">
-              <a class="imageWrapper" href="http://shiftshark-aandre.rhcloud.com">
-                <img src="images/shiftshark.png">
+              <a class="imageWrapper" href="{{project.link}}">
+                <img ng-src="{{project.img}}">
               </a>
             </div>
             <div class="description">
-              <div class="ui header">MIT <a href="http://student.mit.edu/catalog/m6a.html#6.170">6.170</a> Final Project</div>
-              <p></p>
-              <p>Shiftshark was a 5 week project for my software design class. I worked with my team of 4 to design, present, and implement our idea. ShiftShark is a scheduling application that attempts to focus on ease of use for employers and trading for employees.</p>
-              <p>Technologies used in the project are MongoDB, MongooseJS, NodeJS, ExpressJS, PassportJS, HandlebarsJS, Embedded Javascript, MomentJS, fancyBox, and Semantic UI.</p>
-              <p>The site can be found <a href="http://shiftshark-aandre.rhcloud.com">here</a> and the source can be found <a href="https://github.com/shiftshark/shiftshark">here</a>.</p>
+              <div class="ui header" ng-bind-html="project.head"></div>
+              <div ng-bind-html="project.desc"></div>
             </div>
           </div>
         </div>
-
-        <!-- Amazejobs -->
-        <div class="ui modal amazejobs">
-          <i class="close icon"></i>
-          <div class="huge header">
-            Amazejobs by Team Hashrocket
-          </div>
-          <div class="content">
-            <div class="ui medium image">
-              <a class="imageWrapper" href="http://amazejobs-hashrocket.rhcloud.com/">
-                <img src="images/hashrocket.png">
-              </a>
-            </div>
-            <div class="description">
-              <div class="ui header">MIT <a href="http://student.mit.edu/catalog/m6a.html#6.170">6.170</a> Small Project</div>
-              <p></p>
-              <p>Amazejobs was a 4 week project for my software design class. I worked with my team of 4 to design and implement our idea. Amazejobs is a job application task manager that was inspired by intern application season.</p>
-              <p>Technologies used in the project are MongoDB, MongooseJS, NodeJS, ExpressJS, HandlebarsJS, Embedded Javascript, MomentJS, Google OAuth, and Semantic UI.</p>
-              <p>The site can be found <a href="http://amazejobs-hashrocket.rhcloud.com/">here</a> and the source can be found <a href="https://github.com/TeamHashrocket/AmazeJobs">here</a>.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Microsoft -->
-        <div class="ui modal microsoft">
-          <i class="close icon"></i>
-          <div class="huge header">
-            Microsoft
-          </div>
-          <div class="content">
-            <div class="ui medium image">
-              <a class="imageWrapper" href="http://www.bing.com/">
-                <img src="images/microsoft.png">
-              </a>
-            </div>
-            <div class="description">
-              <div class="ui header">Bing Internship</div>
-              <p></p>
-              <p>During the summer of 2014, I took up an internship with Microsoft's <a class="link" href="http://www.bing.com/">Bing</a> division. Due to a signed NDA, I cannot disclose the specifics of what I worked on. I worked in a team of 3 to devise and develop a project that used Microsoft's <a class="link" href="http://www.windowsphone.com/en-us/how-to/wp8/apps/meet-cortana">Cortana</a> and leveraged Bing and drived profits.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- What Song -->
-        <div class="ui modal wsiia">
-          <i class="close icon"></i>
-          <div class="huge header">
-            What Song is it Anyway
-          </div>
-          <div class="content">
-            <div class="ui medium image">
-              <a class="imageWrapper" href="https://play.google.com/store/apps/details?id=com.wsiia">
-                  <img src="images/wsiia.png">
-              </a>
-            </div>
-            <div class="description">
-              <div class="ui header">MIT <a class="link" href="http://web.mit.edu/21w.789/www/">21w.789</a> Communicating with Mobile Technology</div>
-                <p></p>
-                <p>I worked in a team to develop an android application for a class on mobile technology. The class mainly focused on project design and human interaction with technology. Our team created a music game Android application. After user studies, we were able to create a game that would not only be enjoyable, but also improve interaction between people in their daily lives. The app is based on Android SDK using SQLite and the Apache Commons Jaro-Winkler distance library.</p>
-                <p>The app can be found <a class="link" href="https://play.google.com/store/apps/details?id=com.wsiia">here,</a> and the source can be found <a class="link" href="https://github.com/Bandits789/WhatSongIsItAnyway">here.</a></p>
-            </div>
-          </div>
-        </div>
-
-        <!-- MIT ML -->
-        <div class="ui modal mitml">
-          <i class="close icon"></i>
-          <div class="huge header">
-            MIT Media Lab
-          </div>
-          <div class="content">
-            <div class="ui medium image">
-              <a class="imageWrapper" href="http://media.mit.edu">
-                <img src="images/mitml.png">
-              </a>
-            </div>
-            <div class="description">
-              <div class="ui header"><a class="link" href="http://resenv.media.mit.edu/">Responsive Environments</a> Group</div>
-                <p></p>
-                <p>I worked in the <a class="link" href="http://media.mit.edu/">MIT Media Lab</a> under a Ph.D student in the Responsive Environments Group. His thesis was based on a more humanly-intuitive way to control lighting that would be used in modern society. My initial goal was to first create a 3D rendition of his idea in the <a class="link" href="http://unity3d.com/">Unity Game Engine</a> that would be of high-enough quality to showcase to current and potential sponsors on the Media Lab sponsor day.</p>
-                <p>The next goal was to take the research to the physical space and to create a system and mobile interface. The mobile interface was created on <a class="link" href="http://hexler.net/software/touchosc">Touch OSC</a> for iPhone and Android. I worked with a state-of-the-art <a class="link" href="http://www.colorkinetics.com/">Color Kinetics</a> system sponsored by Royal Philips, and created a reliable, research application that would accurately record user input and implement his research algorithms efficiently and effectively.</p>
-                <p>Source code is not publicly available for this project.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- vSafe -->
-        <div class="ui modal vsafe">
-          <i class="close icon"></i>
-          <div class="huge header">
-            vSafe
-          </div>
-          <div class="content">
-            <div class="ui medium image">
-              <a class="imageWrapper" href="http://aandre.scripts.mit.edu/vsafe/">
-                <img src="images/vsafe.png">
-              </a>
-            </div>
-            <div class="description">
-              <div class="ui header">MIT <a class="link" href="http://student.mit.edu/catalog/m6c.html#6.813">6.813</a> UI & Design</div>
-                <p></p>
-                <p>I created this website for a user interface and design class. The class was based on user-centered design, user testing, idea/project generation, and design iteration. The site was built on Django, MySQL, and uses jQuery and Semantic UI. The basis of the site is to give a starting point and quick reference to vegans and vegetarians, so that they can quickly tell what is vegan or vegetarian. The content on the site is not completely accurate, because the site was more proof-of-concept and to give an intuitive UI.</p>
-                <p>The site can be found <a class="link" href="http://aandre.scripts.mit.edu/vsafe/">here,</a> and the source can be found <a class="link" href="https://github.com/aboolean/vSafe">here.</a></p>
-            </div>
-          </div>
-        </div>
-      
-      <!-- github -->
-        <div class="ui modal github">
-          <i class="close icon"></i>
-          <div class="huge header">
-            Github
-          </div>
-          <div class="content">
-            <div class="ui medium image">
-              <a class="imageWrapper" href="https://www.github.com/e111077">
-                <img src="images/github.png">
-              </a>
-            </div>
-            <div class="description">
-              <div class="ui header">E111077</div>
-                <p></p>
-                <p>This is <a class="link" href="https://www.github.com/e111077">my Github account.</a> The source of this website can be found as a public repository. You may also find code for related projects that I have worked on.</p>
-
-                <p>This site uses <a href="http://semantic-ui.com/">Semantic-UI</a>, <a href="http://jquery.com/">jQuery</a>, some Google fonts, MIT SIPB's <a href="http://scripts.mit.edu">Scripts</a> hosting service, and lots of love and procrastination. &lt;3.</p>
-            </div>
-          </div>
-        </div>
-
 
       </div>
     </div>
