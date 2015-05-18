@@ -1,14 +1,27 @@
+// create app
 var personalSite = angular.module('personalSite', []);
 
+// controller for the projects and modules section
 personalSite.controller('projectsController', ['$scope', '$sce',
 function($scope, $sce) {
-  $scope.modals = function (projectName) {
+  // show modal click function
+  $scope.showModal = function (projectName) {
     'use strict';
     $('.' + projectName + '.modal').modal('show');
   }
 
+  // html code for apostrophe
   // &#39;
 
+  // model for my projects section
+  // project schema = {
+  //   name  : one-word string,
+  //   title : string,
+  //   img   : url,
+  //   link  : url,
+  //   head  : html,
+  //   desc  : html
+  // }
   var projects = [
     {
       name  : 'ShiftShark',
@@ -78,6 +91,7 @@ function($scope, $sce) {
 
   $scope.projects = [];
 
+  // goes through each project and deems it as injectable HTML and adds it to scope
   for (var i in projects) {
     var project = projects[i];
 

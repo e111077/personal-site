@@ -86,7 +86,7 @@
       <!-- Projects -->
       <div class="ui hidden bodyContent projects" ng-controller="projectsController">
         <div class="wrap gallery" ng-repeat="project in projects">
-          <a class="ui wrap raised segment" ng-click="modals(project.name)">
+          <a class="ui wrap raised segment" ng-click="showModal(project.name)">
             <img ng-src="{{project.img}}" alt="{{project.title}}">
           </a>
         </div>
