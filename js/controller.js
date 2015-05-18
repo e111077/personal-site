@@ -4,9 +4,10 @@ personalSite.controller('projectsController', ['$scope', '$sce',
 function($scope, $sce) {
   $scope.modals = function (projectName) {
     'use strict';
-    console.log(projectName);
     $('.' + projectName + '.modal').modal('show');
   }
+
+  // &#39;
 
   var projects = [
     {
@@ -64,6 +65,14 @@ function($scope, $sce) {
       link  : 'https://www.github.com/e111077',
       head  : 'E111077',
       desc  : '<p>This is <a class="link" href="https://www.github.com/e111077">my Github account.</a> The source of this website can be found as a public repository. You may also find code for related projects that I have worked on.</p><p>This site uses <a href="https://angularjs.org/">AngularJS</a>, <a href="http://semantic-ui.com/">Semantic-UI</a>, <a href="http://jquery.com/">jQuery</a>, some Google fonts, MIT SIPB&#39;s <a href="http://scripts.mit.edu">Scripts</a> hosting service, and lots of love and procrastination. &lt;3.</p>'
+    },
+    {
+      name  : 'labs',
+      title : 'My Experimentation Site',
+      img   : '/images/labs.png',
+      link  : 'http://everypushisprod.mit.edu',
+      head  : 'Elliott Labs',
+      desc  : '<p>Take a look at what I&#39;m currently working on. <a href="http://everypushisprod.mit.edu">This</a> is the site that I use as my online playspace. It may be very broken, boring, or cool.</p><p><b>Proceed with caution!</b></p>'
     }
   ];
 
