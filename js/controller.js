@@ -35,9 +35,9 @@ function($scope, $sce) {
       name  : 'Sumoji',
       title : 'Meteor Summer Student Hackathon',
       img   : '/images/sumoji.png',
-      link  : 'http://www.google.com',
+      link  : 'https://github.com/Sumoji/sumoji',
       head  : 'Sumoji',
-      desc  : '<p>During the summer of 2015, I participated in the <a href="https://www.meteor.com/">Meteor</a> 2015 Student Summer <a href="http://info.meteor.com/blog/2015-meteor-student-summer-hackathon-recap">Hackathon</a>. I worked in a team of 3 with <a href="http://www.stevenanthony.me/">Steven Rivera</a> and <a href="">Cathleen Gendron</a> and helped develop the physics engine, the Canvas, and various other small contributions around the project (especially the emojis). We won "best use of emoji". The project only used Meteor, and jQuery as the goal of the hackathon was to use the Meteor product.'
+      desc  : '<p>During the summer of 2015, I participated in the <a href="https://www.meteor.com/">Meteor</a> 2015 Student Summer <a href="http://info.meteor.com/blog/2015-meteor-student-summer-hackathon-recap">Hackathon</a>. I worked in a team of 3 with <a href="http://www.stevenanthony.me/">Steven Rivera</a> and <a href="">Cathleen Gendron</a> and helped develop the physics engine, the Canvas, and various other small contributions around the project (especially the emojis). We won "best use of emoji". The project only used Meteor, and jQuery as the goal of the hackathon was to use the Meteor product. Source code can be found <a href="https://github.com/Sumoji/sumoji">here</a>.</p>'
     },
     {
       name  : 'ShiftShark',
