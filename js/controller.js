@@ -29,7 +29,7 @@ function($scope, $sce) {
       img   : '/images/google.png',
       link  : 'http://www.google.com',
       head  : 'Google Play Books Internship',
-      desc  : '<p>During the summer of 2015, I interned at Google in the <a href="https://play.google.com/books">Play Books</a> division. There I worked closely with my SDE host and a PM to design, implement, and ship (hopefully! I am still working on this part) a full-stack application that will affect thousands of publishers and reduce a workflow that would typically take Google&#39;s merchandisers days to minutes. Languages and technologies that I have worked with on this project are: Java, Google Closure / Javascript, PolymerJs, and Python.</p>'
+      desc  : '<p>During the summer of 2015, I interned at Google in the <a href="https://play.google.com/books">Play Books</a> division. There I worked closely with my SDE host and a PM to design, implement, and ship a full-stack application that will affect thousands of publishers and reduce a workflow that would typically take Google&#39;s merchandisers days to minutes. Languages and technologies that I have worked with on this project are: Java, Google Closure / Javascript, PolymerJs, and Python.</p>'
     },
     {
       name  : 'ShiftShark',
