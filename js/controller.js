@@ -32,6 +32,14 @@ function($scope, $sce) {
       desc  : '<p>During the summer of 2015, I interned at Google in the <a href="https://play.google.com/books">Play Books</a> division. There I worked closely with my SDE host and a PM to design, implement, and ship a full-stack application that will affect thousands of publishers and reduce a workflow that would typically take Google&#39;s merchandisers days to minutes. Languages and technologies that I have worked with on this project are: Java, Google Closure / Javascript, PolymerJs, and Python.</p>'
     },
     {
+      name  : 'Sumoji',
+      title : 'Meteor Summer Student Hackathon',
+      img   : '/images/sumoji.png',
+      link  : 'http://www.google.com',
+      head  : 'Sumoji',
+      desc  : '<p>During the summer of 2015, I participated in the <a href="https://www.meteor.com/">Meteor</a> 2015 Student Summer <a href="http://info.meteor.com/blog/2015-meteor-student-summer-hackathon-recap">Hackathon</a>. I worked in a team of 3 with <a href="http://www.stevenanthony.me/">Steven Rivera</a> and <a href="">Cathleen Gendron</a> and helped develop the physics engine, the Canvas, and various other small contributions around the project (especially the emojis). We won "best use of emoji". The project only used Meteor, and jQuery as the goal of the hackathon was to use the Meteor product.'
+    },
+    {
       name  : 'ShiftShark',
       title : 'ShiftShark Easy Scheduling',
       img   : '/images/shiftshark.png',
