@@ -2,7 +2,7 @@ $(function () {
   'use strict';
 
   // detail and set when I last updated the resume
-  var lastUpdated = "July 2015";
+  var lastUpdated = "September 2015";
 
   $('#lastUpdated').html("Last updated " + lastUpdated + ".");
 
