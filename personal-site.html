@@ -1,0 +1,33 @@
+<link rel="import" href="top-bar.html">
+<link rel="import" href="about-me.html">
+
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+
+<dom-module id="personal-site">
+<template>
+  <style>
+    :host {
+      --title-font: {
+        font-family: ElliScript;
+        font-size: 4em;
+      }
+    }
+
+    #mainContent {
+      margin-top: 2em;
+      @apply(--layout-vertical);
+      @apply(--layout-center-center);
+    }
+  </style>
+  
+  <top-bar></top-bar>
+  <div id="mainContent">
+    <about-me></about-me>
+  </div>
+</template>
+<script>
+  Polymer({
+    is: 'personal-site'
+  });
+</script>
+</dom-module>

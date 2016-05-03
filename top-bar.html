@@ -1,0 +1,49 @@
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+
+<dom-module id="top-bar">
+<template>
+  <style>
+    :host {
+      color: white;
+      padding: 20px;
+      background-color: black;
+      display: block;
+    }
+
+    #title {
+      @apply(--title-font);
+      font-size: 5em;
+      outline: solid 1px;
+      outline-color: white;
+      padding: 5px 10px 5px 10px;
+    }
+
+    #container {
+      @apply(--layout-horizontal);
+      @apply(--layout-justified);
+    }
+
+    #logo {
+      height: 5em;
+    }
+
+    #rightBuffer {
+      width: 130px;
+    }
+  </style>
+
+  <div id="container" class="horizontal">
+    <img id="logo" src="img/esig_white.png">
+    <div id="title">
+      Elliott Marquez
+    </div>
+    <div id="rightBuffer"></div>
+  </div>
+</template>
+
+<script>
+  Polymer({
+    is: 'top-bar'
+  });
+</script>
+</dom-module>
