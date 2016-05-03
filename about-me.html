@@ -1,16 +1,113 @@
+<link rel="import" href="google-text.html">
+
 <dom-module id="about-me">
 <template>
   <style>
-    :host {
-    }
-
+    /*#asdf{border: solid black 1px;}*/
     .title {
       @apply(--title-font);
     }
+
+    .big.title {
+      font-size: 5em;
+      text-align: left;
+    }
+
+    .content {
+      font-family: var(--main-font);
+      font-size: 2em;
+    }
+
+    .contentWrapper {
+      border: solid black 1px;
+      padding: 1em;
+      width: 80%;
+      margin: 0 auto;
+      margin-bottom: 1.5em;
+    }
+
+    a {
+      text-decoration: none;
+      color: #C0362C;
+    }
+
+    a:hover {
+      color: #dd7169;
+    }
+
+    .content img {
+      height: 20px;
+      transform: translateY(-3.5px);
+    }
+
+    #profile {
+      display: block;
+      margin: auto;
+      width: 80%;
+    }
   </style>
 
-  <div class="title">
-    Hello World
+  <div class="big title">
+    About Me
+  </div>
+  <div id="asdf">
+    <div class="title">
+      What am I?
+    </div>
+    <div class="contentWrapper">
+      <div class="content">
+        Heya there, I'm Elliott, a {{age}} year old Software Engineer from South Texas living in
+
+        <a href="http://colors.findthedata.com/l/923/International-Orange-Golden-Gate-Bridge" title="Google is great">
+          San Francisco<span><img src="img/ggbridge.png"></span><!--
+     --></a>.
+      </div>
+    </div>
+
+    <div class="title">
+      What do I do?
+    </div>
+    <div class="contentWrapper">
+      <div class="content">
+        I do a lot of front-end software development for<google-text></google-text>'s <a href="https://www.polymer-project.org">Polymer <span><img src="img/polymer.png"></span></a> team because I work there :)
+      </div>
+    </div>
+
+    <div class="title">
+      What did I do?
+    </div>
+    <div class="contentWrapper">
+      <div class="content">
+        I used to do a bunch of book-and-tears-learning in college at <a href="http://web.mit.edu/">MIT</a> in Cambridge, Massachusetts and ended up getting a Bachelors in Computer Science! I also learned other things there like, German, physics, how to burn chicken, Incan history, and other random fun stuff.
+      </div>
+    </div>
+
+    <div class="title">
+      What did I do before that?
+    </div>
+    <div class="contentWrapper">
+      <div class="content">
+        Before that I went to a <a href="http://nisd.net/healthcareers/">health-oriented high school</a> and learned CPR, Latin, how to fiddle with a calculator, and that I really did not want to be a doctor but <a href="https://xkcd.com/722/">a math person that pushes buttons</a>.
+      </div>
+    </div>
+
+    <div class="title">
+      What do I like?
+    </div>
+    <div class="contentWrapper">
+      <div class="content">
+        I like computers, video games, <a href="https://translate.google.com/#de/en/Ich%20mag%20Sprachen%20lernen.">Sprachen lernen</a>, Netflix, Vampire Weekend, terrible horror movies, musicals, Mozart, and men. This is not all inclusive; please stalk me on social media for more.
+      </div>
+    </div>
+
+    <div class="title">
+      What do I look like?
+    </div>
+    <div class="contentWrapper">
+      <div class="content">Something like this:</div>
+      <img src="img/profile.jpg" id="profile">
+      <div class="content">Thanks, <a href="http://andreaboulian.com">Andre</a>, for the photo!</div>
+    </div>
   </div>
 </template>
 <script>

@@ -7,27 +7,38 @@
 <template>
   <style>
     :host {
+      --main-font: ElliScript;
+
       --title-font: {
         font-family: ElliScript;
-        font-size: 4em;
+        font-size: 3em;
+        text-align: center;
       }
     }
 
     #mainContent {
+      min-width: 790px;
+      width: 80%;
+      margin: 0 auto;
       margin-top: 2em;
-      @apply(--layout-vertical);
-      @apply(--layout-center-center);
     }
   </style>
   
   <top-bar></top-bar>
   <div id="mainContent">
-    <about-me></about-me>
+    <about-me age={{age}}></about-me>
   </div>
 </template>
 <script>
   Polymer({
-    is: 'personal-site'
+    is: 'personal-site',
+
+    properties: {
+      age: {
+        type: Number,
+        value: 22
+      }
+    }
   });
 </script>
 </dom-module>
