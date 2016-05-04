@@ -1,0 +1,51 @@
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+
+<link rel="import" href="project-card.html">
+
+<dom-module id="my-projects">
+<template>
+  <style>
+    .title {
+      @apply(--title-font);
+    }
+
+    .big.title {
+      font-size: 5em;
+      text-align: left;
+    }
+
+    .contentWrapper {
+      padding: 1em;
+      width: 80%;
+      margin: 0 auto;
+      margin-bottom: 1.5em;
+
+      @apply(--layout);
+      @apply(--layout-center-justified);
+      @apply(--layout-wrap);
+    }
+
+    .contentWrapper span {
+      margin: auto;
+    }
+  </style>
+  
+  <div class="big title">
+    Projects
+  </div>
+
+  <div class="contentWrapper">
+    <template is="dom-repeat" items="{{projects}}" as="project">
+      <project-card project="{{project}}" selectedProject="{{selectedProject}}"></project-card>
+    </template>
+  </div>
+</template>
+<script>
+  Polymer({
+    is: 'my-projects',
+
+    properties: {
+    }
+  });
+</script>
+</dom-module>
