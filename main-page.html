@@ -52,7 +52,8 @@
   <div id="mainContent">
     <about-me age="{{age}}" pc="{{pc}}"></about-me>
     <div class="separator"></div>
-    <neon-animated-pages
+    <neon-animated-pages on-neon-animation-finish="_onNeonAnimationFinish"
+        id="projectsSection"
         attr-for-selected="name"
         selected="[[selectedPage.name]]">
       <my-projects
@@ -197,6 +198,11 @@
 
     _onClosePopup: function() {
       this.set('selectedPage.name', 'main');
+    },
+
+    _onNeonAnimationFinish: function() {
+      // debugger;
+      document.body.scrollTop = this.$.projectsSection.offsetTop;
     }
   });
 </script>
