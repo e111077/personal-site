@@ -1,142 +1,34 @@
-<!DOCTYPE HTML>
-<html ng-app="personalSite">
-  <head>
-    <title>Elliott Marquez</title>
-    <link rel="icon" 
-      type="image/ico" 
-      href="images/favicon.ico">
-    <!-- JQuery -->
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <!-- Angular -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-    <!-- Semantic -->
-    <script src="lib/semantic/semantic.min.js"></script>
-    <link rel="stylesheet" href="lib/semantic/semantic.min.css" type="text/css" />
-    <!-- Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
-    <!-- Styling -->
-    <link rel="stylesheet" href="css/style.css" type="text/css" />
-    <!-- Angular Files -->
-    <script src="js/controller.js"></script>
-    <!-- Functionality js -->
-    <script src="js/view.js"></script>
-  </head>
-  <body>
-    <!-- Header -->
-    <div class="centered head">
-      <div>
-        <img class="wrap" alt="Elliott's signature" src="images/esig.svg" id="logo">
-        <div class="ntitle wrap">Elliott Marquez</div>
-      </div>
-      <img preserveaspectratio="none" id="separator" alt="Rainbow Separator" src="images/colorbar.svg">
-      
-      <!-- Navbar -->
-      <div class="wrap navbar">
-        <div class="ui centered wrap shadowed menu">
-          <a class="active main red item" value="about">
-            <i class="ui red user icon"></i>
-            About Me
-          </a>
-          <a class="green item" value="projects">
-            <i class="ui green code icon"></i>
-            Projects
-          </a>
-          <a class="blue item" value="resume">
-            <i class="ui blue file pdf outline icon"></i>
-            Resume
-          </a>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Content -->
-    <div class="centered content">
-      <!-- About -->
-      <div class="ui bodyContent about">
-        <h3 class="ui red horizontal header divider">
-          <i class="ui university icon"></i>
-          School
-        </h3>
-        <p class="ui raised segment">
-          Hello, my name is Elliott Marquez. I am a senior at the <a href="http://web.mit.edu">Massachusetts Institute of Technology</a> living in <a href="http://simmons.mit.edu">Simmons Hall</a>. I was born and raised in San Antonio, Texas. There, I attended <a href="http://www.nisd.net/schools/info/6">Northside Health Careers High School</a>; a health-oriented magnet school ranked top in the city and top 150 nationally. Though I spent years learning medical skills and interning at area hospitals, I soon learned that my true passion was in mathematics and engineering. I spent over seven years in both middle school and high school taking part in state mathematics competitions and in state Latin competitions specializing in Roman History.
-        </p>
-        <h3 class="ui green horizontal header divider">
-          <i class="ui game icon"></i>
-          Interests
-        </h3>
-        <p class="ui raised segment">
-          I love video games though I wish I had more time to play them. You can probably find me somewhere playing Pok&eacute;mon, Super Smash Brothers, or something from the Total War Series (and when I say something I mean all of them). Had I the time and bottomless wallet, I would go back to feeding my World of Warcraft addiction. I love watching sports; I'm bad at them (like, really bad), but being an armchair coach is my specialty! I really love Basketball because coming from San Antonio, all we have is the San Antonio Spurs. When I watch soccer, I cheer for the Seattle Sounders, and for football I cheer for the Cowboys (even though it hurts to watch sometimes).
-          <br><br>
-          If you want to talk games, tech, musicals, debate whether Marius > Caesar, Kirk > Picard, Intellij > Eclipse, dogs > cats, or just want to chat, hit me up on <a href="https://twitter.com/Elliott_Marquez">my Twitter handle</a>. It may look dead, but I check it all the time!
-          <br><br>
-          P.S. the answers to those debates are yes.
-        </p>
-        <h3 class="ui blue horizontal header divider">
-          <i class="ui retro camera icon"></i>
-          Me
-        </h3>
-        <div class="centered-text profile">
-          <div class="ui raised wrap imageWrapper segment">
-            <a href="meyer.html">
-              <img alt="Photo of Elliott" src="images/profile.jpg">
-            </a>
-            <div class="ui bottom right attached label">
-              Photo by the amazing <a href="http://andreaboulian.com/">Andre Aboulian</a>.
-            </div>
-          </div>
-        </div>
-      </div>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Elliott Marquez</title>
+  <link rel="icon" type="image/ico" href="img/favicon.ico">
+  <script src="../webcomponentsjs/webcomponents.min.js"></script>
+  <link rel="import" href="../polymer/polymer.html">
+  <link rel="import" href="main-page.html">
+  <style>
+    @font-face {
+      font-family: ElliScript;
+      src: url(files/ElliScript.ttf);
+    }
 
-      <!-- Projects -->
-      <div class="ui hidden bodyContent projects" ng-controller="projectsController">
-        <div class="wrap gallery" ng-repeat="project in projects">
-          <a class="ui wrap raised segment" ng-click="showModal(project.name)">
-            <img ng-src="{{project.img}}" alt="{{project.title}}">
-          </a>
-        </div>
-      </div>
+    body {
+      margin: 0 0 0 0;
+      /*height: 10000px;*/
+      min-width: 790px;
+    }
+  </style>
+</head>
+<body>
+  <main-page></main-page>
 
-      <!-- Resume -->
-      <div class="ui raised segment bodyContent hidden resume">
-        <div id="resumeWrapper">
-          <iframe id="resume" src="http://docs.google.com/gview?url=http://marquez.mit.edu/files/resume.pdf&embedded=true" frameborder="0"></iframe>
-        </div>
-        <div>Direct download <a href="/files/resume.pdf">here</a>.</div>
-        <div id="lastUpdated"></div> 
-      </div>
-
-      <!-- Modals -->
-      <div class="modals" ng-controller="projectsController">
-        <div class="ui modal {{project.name}}" ng-repeat="project in projects">
-          <i class="close icon"></i>
-          <div class="huge header">
-            {{project.title}}
-          </div>
-          <div class="content">
-            <div class="ui medium image">
-              <a class="imageWrapper" href="{{project.link}}">
-                <img ng-src="{{project.img}}">
-              </a>
-            </div>
-            <div class="description">
-              <div class="ui header" ng-bind-html="project.head"></div>
-              <div ng-bind-html="project.desc"></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <script>
+  <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
       ga('create', 'UA-49979467-3', 'auto');
       ga('send', 'pageview');
-
     </script>
-  </body>
+</body>
 </html>

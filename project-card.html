@@ -1,0 +1,54 @@
+<link rel="import" href="../iron-image/iron-image.html">
+
+<dom-module id="project-card">
+<template>
+  <style>
+    :host {
+      z-index: 2;
+    }
+    #wrapper {
+      margin: 2px 2px 2px 2px;
+      border: solid black 1px;
+      height: 200px;
+      width: 200px;
+      cursor: pointer;
+      cursor: hand;
+      padding: 18px;
+      background-color: white;
+    }
+
+    iron-image {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+  
+  <div id="wrapper">
+    <iron-image src="{{data.img}}" sizing="contain"></iron-image>
+  </div>
+</template>
+<script>
+  Polymer({
+    is: 'project-card',
+
+    properties: {
+      data: {
+        type: Object
+      },
+
+      selectedProject: {
+        type: Object,
+        notifies: true
+      }
+    },
+
+    listeners: {
+      'tap': '_onTap'
+    },
+
+    _onTap: function() {
+      this.fire('project-tap', {node: this});
+    }
+  });
+</script>
+</dom-module>

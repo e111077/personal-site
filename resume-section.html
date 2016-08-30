@@ -1,0 +1,59 @@
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+
+<dom-module id="resume-section">
+  <template>
+    <style is="custom-style" include="iron-flex iron-flex-alignment">
+      .title {
+        @apply(--title-font);
+      }
+
+      :host {
+        font-family: var(--main-font);
+        font-size: 2em;
+      }
+
+      #resumeWrapper {
+        position: relative;
+        width: 100%;
+        padding-bottom: 130%;
+        border: 1px solid black;
+      }
+
+      #resume {
+        position: absolute;
+        top: 2%;
+        width: 96%;
+        height: 96%;
+      }
+
+      a {
+        text-decoration: none;
+        color: #C0362C;
+      }
+
+      a:hover {
+        color: #dd7169;
+      }
+    </style>
+
+    <div class="title">Resume</div>
+    <div>
+      <div id="resumeWrapper" class="layout vertical center-center">
+        <iframe id="resume" src="http://docs.google.com/gview?url=http://marquez.mit.edu/files/resume.pdf&embedded=true" frameborder="0"></iframe>
+      </div>
+      <div>Direct download <a href="/files/resume.pdf">here</a>.</div>
+      <div>Last updated [[lastUpdated]]</div> 
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'resume-section',
+
+      properties: {
+        lastUpdated: {
+          String
+        }
+      }
+    });
+  </script>
+</dom-module>
