@@ -3,6 +3,10 @@
 <dom-module id="project-card">
 <template>
   <style>
+    :host {
+      background-color: white;
+      z-index: 2;
+    }
     #wrapper {
       margin: 2px 2px 2px 2px;
       border: solid black 1px;
@@ -20,7 +24,7 @@
   </style>
   
   <div id="wrapper">
-    <iron-image src="{{project.img}}" sizing="contain"></iron-image>
+    <iron-image src="{{data.img}}" sizing="contain"></iron-image>
   </div>
 </template>
 <script>
@@ -28,7 +32,7 @@
     is: 'project-card',
 
     properties: {
-      project: {
+      data: {
         type: Object
       },
 
@@ -43,7 +47,7 @@
     },
 
     _onTap: function() {
-      this.fire('projectTap', {project: this.project, node: this});
+      this.fire('project-tap', {node: this});
     }
   });
 </script>

@@ -1,0 +1,156 @@
+<link rel="import" href="../neon-animation/neon-shared-element-animatable-behavior.html">
+<link rel="import" href="../neon-animation/animations/hero-animation.html">
+<link rel="import" href="../neon-animation/animations/ripple-animation.html">
+<link rel="import" href="../neon-animation/animations/fade-out-animation.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../iron-image/iron-image.html">
+
+
+<dom-module id="project-popup">
+  <template>
+    <style is="custom-style" include="iron-flex iron-flex-alignment">
+      :host {
+        font-family: var(--main-font);
+        font-size: 2em;
+        z-index: 3;
+      }
+
+      #wrapper {
+        margin-left: -10vw;
+        width: 100vw;
+        height: 100vh;
+        background-color: transparent;
+        position: relative;
+      }
+
+      #background {
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        position: absolute;
+      }
+
+      #popup {
+        background-color: white;
+        padding: 20px;
+        max-width: 80%;
+        position: absolute;
+        /*z-index: 3;*/
+      }
+
+      #title {
+        font-size: 2em;
+      }
+
+      #head {
+        font-size: 1.2em;
+      }
+
+      #image {
+        width: 200px;
+        height: 200px;
+      }
+
+      a {
+        text-decoration: none;
+        color: #C0362C;
+      }
+
+      a:hover {
+        color: #dd7169;
+      }
+
+      #imgWrap {
+        padding-right: 20px;
+      }
+    </style>
+    <div id="wrapper" class="layout vertical center-center" on-tap="closePopup">
+      <div id="background"></div>
+      <div id="popup" class="layout horizontal" on-tap="_stopClick">
+        <div id="imgWrap" class="layout vertical center-center">
+          <iron-image
+              id="image"
+              src="[[project.img]]"
+              sizing="contain">
+          </iron-image>
+        </div>
+        <div>
+          <a id="title" href$="[[project.link]]">[[project.title]]</a>
+          <div id="head"></div>
+          <div id="desc"></div>
+        </div>
+      </div>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'project-popup',
+      behaviors: [
+        Polymer.NeonSharedElementAnimatableBehavior
+      ],
+
+      properties: {
+        sharedElements: {
+          type: Object,
+          value: function() {
+            return {
+              hero: this.$.popup,
+              ripple: this.$.background
+            }
+          }
+        },
+
+        animationConfig: {
+          type: Object,
+          value: function() {
+            return {
+              entry: [{
+                name: 'ripple-animation',
+                id: 'ripple',
+                toPage: this
+              },  {
+                name: 'hero-animation',
+                id: 'hero',
+                toPage: this
+              }],
+
+              exit:[{
+                name: 'fade-out-animation',
+                node: this.$.background
+              }, {
+                name: 'hero-animation',
+                id: 'hero',
+                fromPage: this,
+                timing: {
+                  delay: 300,
+                  duration: 300
+                }
+              }]
+            }
+          }
+        },
+
+        project: {
+          type: Object
+        }
+      },
+
+      observers: [
+        '_projectChanged(project.desc, project.head)'
+      ],
+
+      _projectChanged: function(description, head) {
+        Polymer.dom(this.$.desc).innerHTML = description;
+        Polymer.dom(this.$.head).innerHTML = head;
+      },
+
+      closePopup: function() {
+        this.fire('close-popup');
+      },
+
+      _stopClick: function(evt) {
+        evt.stopPropagation();
+      }
+    });
+  </script>
+</dom-module>

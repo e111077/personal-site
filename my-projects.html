@@ -1,6 +1,9 @@
-<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
-
 <link rel="import" href="project-card.html">
+
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../neon-animation/neon-shared-element-animatable-behavior.html">
+<link rel="import" href="../neon-animation/animations/hero-animation.html">
+<link rel="import" href="../neon-animation/animations/ripple-animation.html">
 
 <dom-module id="my-projects">
 <template>
@@ -35,8 +38,8 @@
   </div>
 
   <div class="contentWrapper">
-    <template is="dom-repeat" items="{{projects}}" as="project">
-      <project-card project="{{project}}" selectedProject="{{selectedProject}}"></project-card>
+    <template is="dom-repeat" items="[[projectsArray]]"" as="project">
+      <project-card data="[[project]]"></project-card>
     </template>
   </div>
 </template>
@@ -44,7 +47,69 @@
   Polymer({
     is: 'my-projects',
 
+    behaviors: [
+      Polymer.NeonSharedElementAnimatableBehavior
+    ],
+
     properties: {
+      projects: {
+        type: Object,
+        observer: '_projectsChanged'
+      },
+
+      projectsArray: {
+        type: Array
+      },
+
+      sharedElements: {
+        type: Object
+      },
+
+      animationConfig: {
+        value: function() {
+          return {
+            entry: [{
+              name: 'hero-animation',
+              id: 'hero',
+              toPage: this
+            }],
+
+            exit: [{
+              name: 'hero-animation',
+              id: 'hero',
+              fromPage: this,
+              timing: {
+                delay: 150,
+                duration: 300
+              }
+            }, {
+              name: 'ripple-animation',
+              id: 'ripple',
+              fromPage: this
+            }]
+          }
+        }
+      }
+    },
+
+    listeners: {
+      'project-tap': '_onProjectTap'
+    },
+
+    _onProjectTap: function(evt) {
+      this.sharedElements = {
+        hero: evt.detail.node,
+        ripple: evt.detail.node
+      }
+    },
+
+    _projectsChanged: function(projects) {
+      var output = [];
+      for (var key in projects) {
+        output.push(projects[key]);
+      }
+
+      this.projectsArray = output;
     }
   });
 </script>
