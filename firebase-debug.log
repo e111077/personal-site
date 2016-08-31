@@ -3,11 +3,12 @@
 [debug] CLI Version:  3.0.7
 [debug] Platform:     darwin
 [debug] Node Version: v6.5.0
-[debug] Time:         Wed Aug 31 2016 01:27:53 GMT-0700 (PDT)
+[debug] Time:         Wed Aug 31 2016 01:40:19 GMT-0700 (PDT)
 [debug] ----------------------------------------------------------------------
 [debug] 
 [info] Starting Firebase development server...
 [info] 
 [info] Project Directory: /Users/elliottmarquez/Dropbox (Personal)/Github/PersonalSite
+[info] Public Directory: /build/bundled
 [info] 
 [info] Server listening at: http://localhost:5000
