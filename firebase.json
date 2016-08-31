@@ -3,15 +3,29 @@
     "rules": "database.rules.json"
   },
   "hosting": {
-    "public": ["build/bundled", "img"],
+    "public": ".",
+    "ignore": [
+      "bower_components",
+      "src",
+      ".firebaserc",
+      ".gitignore",
+      "bower.json",
+      "index.html",
+      "polymer.json",
+      "README.md"
+    ],
     "rewrites": [
       {
         "source": "/main",
-        "destination": "/index.html"
+        "destination": "build/bundled/index.html"
       },
       {
         "source": "/project/*",
-        "destination": "/index.html"
+        "destination": "build/bundled/index.html"
+      },
+      {
+        "source": "/",
+        "destination": "build/bundled/index.html"
       }
     ]
   }
