@@ -1,6 +1,6 @@
 <link rel="import" href="project-card.html">
+<link rel="import" href="shared-styles.html">
 
-<link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
 <link rel="import" href="bower_components/neon-animation/animations/hero-animation.html">
 <link rel="import" href="bower_components/neon-animation/animations/ripple-animation.html">
@@ -26,25 +26,12 @@
 
 <dom-module id="my-projects">
 <template>
-  <style>
-    .title {
-      @apply(--title-font);
-    }
-
-    .big.title {
-      font-size: 5em;
-      text-align: left;
-    }
-
+  <style is="custom-style" include="shared-styles">
     .contentWrapper {
       padding: 1em;
       width: 80%;
       margin: 0 auto;
       margin-bottom: 1.5em;
-
-      @apply(--layout);
-      @apply(--layout-center-justified);
-      @apply(--layout-wrap);
     }
   </style>
   <iron-resizable id="fullContentWrapper">
@@ -52,7 +39,7 @@
       Projects
     </div>
 
-    <div class="contentWrapper">
+    <div class="contentWrapper horizontal layout center-justified wrap">
       <template is="dom-repeat" items="[[projectsArray]]"" as="project">
         <project-card data="[[project]]"></project-card>
       </template>

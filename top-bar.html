@@ -1,8 +1,8 @@
-<link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="shared-styles.html">
 
 <dom-module id="top-bar">
 <template>
-  <style>
+  <style is="custom-style" include="shared-styles">
     :host {
       color: white;
       padding: 20px;
@@ -10,15 +10,10 @@
       display: block;
     }
 
-    #title {
-      @apply(--title-font);
+    .title {
       font-size: 5em;
       outline-color: white;
       padding: 5px 10px 5px 10px;
-    }
-
-    #container {
-      @apply(--layout-center-center);
     }
 
     #logo {
@@ -26,8 +21,8 @@
     }
   </style>
 
-  <div id="container" class="horizontal">
-    <div id="title">
+  <div id="layout center-center" class="horizontal">
+    <div class="title">
       Elliott Marquez
     </div>
   </div>

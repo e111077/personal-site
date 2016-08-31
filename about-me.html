@@ -1,19 +1,10 @@
-<link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="shared-styles.html">
 
 <link rel="import" href="google-text.html">
 
 <dom-module id="about-me">
 <template>
-  <style>
-    .title {
-      @apply(--title-font);
-    }
-
-    .big.title {
-      font-size: 5em;
-      text-align: left;
-    }
-
+  <style is="custom-style" include="shared-styles">
     .content {
       font-family: var(--main-font);
       font-size: 2em;
@@ -21,14 +12,6 @@
 
     .right {
       text-align: right;
-    }
-
-    .flexbox {
-      @apply(--layout);
-    }
-
-    .flex {
-      flex: 1;
     }
 
     .contentWrapper {
@@ -39,16 +22,7 @@
       margin-bottom: 1.5em;
     }
 
-    a {
-      text-decoration: none;
-      color: #C0362C;
-    }
-
-    a:hover {
-      color: #dd7169;
-    }
-
-    .content img {
+    .content img.inline {
       height: 20px;
       transform: translateY(-3.5px);
     }
@@ -72,7 +46,7 @@
         Heya there, I'm Elliott, a {{age}} year old Software Engineer from South Texas living in
 
         <a href="http://colors.findthedata.com/l/923/International-Orange-Golden-Gate-Bridge" title="Google is great">
-          San Francisco<span><img src="img/ggbridge.png"></span><!--
+          San Francisco<span><img class="inline" src="img/ggbridge.png"></span><!--
      --></a>.
       </div>
     </div>
@@ -82,7 +56,7 @@
     </div>
     <div class="contentWrapper">
       <div class="content">
-        I do a lot of front-end software development for<google-text></google-text>'s <a href="https://www.polymer-project.org">Polymer <span><img src="img/polymer.png"></span></a> team because I work there :)
+        I do a lot of front-end software development for<google-text></google-text>'s <a href="https://www.polymer-project.org">Polymer <span><img class="inline" src="img/polymer.png"></span></a> team because I work there :)
       </div>
     </div>
 
@@ -119,9 +93,9 @@
     <div class="contentWrapper">
       <div class="content">Something like this:</div>
       <img src="img/profile.jpg" id="profile">
-      <div class="content flexbox">
-        <div class="flex">Kinda...</div>
-        <div class="flex right">Photo Cred: <a href="{{pc.website}}">{{pc.photographer}}</a></div>
+      <div class="content horizontal flex layout">
+        <div class="flex layout">Kinda...</div>
+        <div class="flex layout right">Photo Cred: <a href="{{pc.website}}">{{pc.photographer}}</a></div>
       </div>
     </div>
   </div>

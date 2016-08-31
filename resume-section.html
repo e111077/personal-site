@@ -1,12 +1,8 @@
-<link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="shared-styles.html">
 
 <dom-module id="resume-section">
   <template>
-    <style is="custom-style" include="iron-flex iron-flex-alignment">
-      .title {
-        @apply(--title-font);
-      }
-
+    <style is="custom-style" include="shared-styles">
       :host {
         font-family: var(--main-font);
         font-size: 2em;
@@ -24,15 +20,6 @@
         top: 2%;
         width: 96%;
         height: 96%;
-      }
-
-      a {
-        text-decoration: none;
-        color: #C0362C;
-      }
-
-      a:hover {
-        color: #dd7169;
       }
     </style>
 
