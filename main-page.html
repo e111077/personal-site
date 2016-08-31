@@ -27,7 +27,7 @@
     }
   </style>
 
-  <app-location route="{{route}}" use-hash-as-path></app-location>
+  <app-location route="{{route}}"></app-location>
   <app-route
       route="{{route}}"
       pattern="/:name"
@@ -191,9 +191,11 @@
     ],
 
     ready: function() {
-      this.async(() => {
-        this.set('route.path', '/main');
-      }, 60)
+      if (!this.route.path || this.route.path == "/") {
+        this.async(() => {
+          this.set('route.path', '/main');
+        }, 60);
+      }
     },
 
     _selectedPageNameChanged(selectedPage) {
