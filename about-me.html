@@ -95,14 +95,20 @@
       <img src="img/profile.jpg" id="profile">
       <div class="content horizontal flex layout">
         <div class="flex layout">Kinda...</div>
-        <div class="flex layout right">Photo Cred: <a href="{{pc.website}}">{{pc.photographer}}</a></div>
+        <div class="flex layout right">Photo Cred: <a href$="[[pc.website]]">{{pc.photographer}}</a></div>
       </div>
     </div>
   </div>
 </template>
 <script>
   Polymer({
-    is: 'about-me'
+    is: 'about-me',
+
+    properties: {
+      pc: Object,
+
+      age: Number
+    }
   });
 </script>
 </dom-module>

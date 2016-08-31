@@ -93,6 +93,10 @@
         }
       },
 
+      projectData: Object,
+
+      selectedProject: Object,
+
       projects: {
         type: Object,
         value: {
@@ -192,13 +196,13 @@
 
     ready: function() {
       if (!this.route.path || this.route.path == "/") {
-        this.async(() => {
+        this.async(function() {
           this.set('route.path', '/main');
-        }, 60);
+        }.bind(this), 60);
       }
     },
 
-    _selectedPageNameChanged(selectedPage) {
+    _selectedPageNameChanged: function(selectedPage) {
       this.selectedProject = this.projects[selectedPage];
     },
 
