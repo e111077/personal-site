@@ -191,7 +191,9 @@
     ],
 
     ready: function() {
-      this.set('selectedPage.name', 'main');
+      this.async(() => {
+        this.set('route.path', '/main');
+      }, 60)
     },
 
     _selectedPageNameChanged(selectedPage) {
@@ -200,8 +202,7 @@
 
     _onProjectTap: function(evt) {
       var project = evt.detail.node;
-      this.set('selectedPage.name', 'project');
-      this.set('projectData.projectName', project.data.name);
+      this.set('route.path', '/project/' + project.data.name);
     },
 
     _onClosePopup: function() {
