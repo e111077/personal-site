@@ -1,0 +1,9 @@
+{
+  "name": "Elliott Marquez",
+  "short_name": "Elliott",
+  "start_url": "/main",
+  "default_locale": "en",
+  "icons": {
+    "256": "src/img/favicon.ico"
+  }
+}
