@@ -1,37 +1,51 @@
-<link rel="import" href="../shared-styles/shared-styles.html">
-<link rel="import" href="../google-text/google-text.html">
+<link rel="import" href="elliott-shared-styles.html">
+<link rel="import" href="elliott-google-text.html">
 
-<dom-module id="about-me">
+<dom-module id="elliott-about-me">
 <template>
-  <style is="custom-style" include="shared-styles">
-    .content {
-      font-family: var(--main-font);
-      font-size: 2em;
-    }
+  <custom-style>
+    <style include="elliott-shared-styles">
+      .content {
+        font-family: var(--main-font);
+        font-size: 2em;
+      }
 
-    .right {
-      text-align: right;
-    }
+      .right {
+        text-align: right;
+      }
 
-    .contentWrapper {
-      border: solid black 1px;
-      padding: 1em;
-      width: 80%;
-      margin: 0 auto;
-      margin-bottom: 1.5em;
-    }
+      .contentWrapper {
+        border: solid black 1px;
+        padding: 1em;
+        width: 80%;
+        margin: 0 auto;
+        margin-bottom: 1.5em;
+      }
 
-    .content img.inline {
-      height: 20px;
-      transform: translateY(-3.5px);
-    }
+      .content img.inline {
+        height: 20px;
+        transform: translateY(-3.5px);
+      }
 
-    #profile {
-      display: block;
-      margin: auto;
-      width: 80%;
-    }
-  </style>
+      #profile {
+        display: block;
+        margin: auto;
+        width: 80%;
+      }
+
+      #photoCred {
+        display: flex;
+      }
+
+      #photoCred div {
+        flex-grow: 1;
+      }
+
+      #photoCred .right {
+        text-align: right;
+      }
+    </style>
+  </custom-style>
 
   <div class="big title">
     About Me
@@ -42,7 +56,7 @@
     </div>
     <div class="contentWrapper">
       <div class="content">
-        Heya there, I'm Elliott, a {{age}} year old Software Engineer from South Texas living in
+        Heya there, I'm Elliott, a [[age}} year]]ld Software Engineer from South Texas living in
 
         <a href="http://colors.findthedata.com/l/923/International-Orange-Golden-Gate-Bridge" title="Google is great">
           San Francisco<span><img class="inline" src="/assets/img/ggbridge.png"></span><!--
@@ -55,7 +69,7 @@
     </div>
     <div class="contentWrapper">
       <div class="content">
-        I do a lot of front-end software development for<google-text></google-text>'s <a href="https://www.polymer-project.org">Polymer <span><img class="inline" src="/assets/img/polymer.png"></span></a> team because I work there :)
+        I do a lot of front-end software development for<elliott-google-text></elliott-google-text>'s <a href="https://www.polymer-project.org">Polymer <span><img class="inline" src="/assets/img/polymer.png"></span></a> team because I work there :)
       </div>
     </div>
 
@@ -92,22 +106,34 @@
     <div class="contentWrapper">
       <div class="content">Something like this:</div>
       <img src="/assets/img/profile.jpg" id="profile">
-      <div class="content horizontal flex layout">
-        <div class="flex layout">Kinda...</div>
-        <div class="flex layout right">Photo Cred: <a href$="[[pc.website]]">{{pc.photographer}}</a></div>
+      <div id="photoCred" class="content">
+        <div>Kinda...</div>
+        <div class="right">Photo Cred: <a href$="[[pc.website]]">[[pc.photographer]]</a></div>
       </div>
     </div>
   </div>
 </template>
 <script>
-  Polymer({
-    is: 'about-me',
+  class ElliottAboutMe extends Polymer.Element {
+    static get is() { return 'elliott-about-me' }
+    
+    static get config() {
+      let props = {
+        properties: {
+          pc: {
+            type: Object
+          },
 
-    properties: {
-      pc: Object,
+          age: {
+            type: Number
+          }
+        }
+      };
 
-      age: Number
+      return props;
     }
-  });
+  }
+
+  customElements.define(ElliottAboutMe.is, ElliottAboutMe);
 </script>
 </dom-module>

@@ -1,0 +1,40 @@
+<link rel="import" href="elliott-shared-styles.html">
+
+<dom-module id="elliott-top-bar">
+<template>
+    <custom-style>
+      <style include="elliott-shared-styles">
+        :host {
+          color: white;
+          padding: 20px;
+          background-color: black;
+          display: block;
+        }
+
+        .title {
+          font-size: 5em;
+          outline-color: white;
+          padding: 5px 10px 5px 10px;
+        }
+
+        #logo {
+          height: 5em;
+        }
+      </style>
+    </custom-style>
+
+  <div>
+    <div class="title">
+      Elliott Marquez
+    </div>
+  </div>
+</template>
+
+<script>
+  class ElliottTopBar extends Polymer.Element {
+    static get is() {return 'elliott-top-bar' }
+  }
+
+  customElements.define(ElliottTopBar.is, ElliottTopBar);
+</script>
+</dom-module>

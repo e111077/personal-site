@@ -1,0 +1,112 @@
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+
+<link rel="import" href="elliott-top-bar.html">
+<link rel="import" href="elliott-about-me.html">
+<link rel="import" href="elliott-projects.html">
+<link rel="import" href="elliott-project-popup.html">
+<link rel="import" href="elliott-shared-styles.html">
+<link rel="import" href="elliott-resume-section.html">
+
+
+<dom-module id="elliott-main-page">
+<template>
+  <style>
+    #mainContent {
+      min-width: 790px;
+      width: 80%;
+      margin: 0 auto;
+      margin-top: 2em;
+    }
+
+    .separator {
+      height: 0px;
+      border: solid black 1px;
+      margin: 2em 0 2em 0;
+    }
+  </style>
+
+  <app-location route="{{route}}"></app-location>
+  <app-route
+      route="{{route}}"
+      pattern="/:name"
+      data="{{selectedPage}}"
+      tail="{{tail}}">
+  </app-route>
+  <app-route
+      route="{{tail}}"
+      pattern="/:projectName"
+      data="{{__projectData}}">
+  </app-route>
+  
+  <elliott-top-bar></elliott-top-bar>
+  <div id="mainContent">
+    <elliott-about-me age="[[age]]" pc="[[pc]]"></elliott-about-me>
+
+    <div class="separator"></div>
+
+    <div id="projectsSection">
+      <elliott-projects
+          on-elliott-project-card-click="_setSelectedProject"
+          id="myProjects"
+          projects="[[projects]]">
+      </elliott-projects>
+      <elliott-project-popup
+          id="projectPopup"
+          project="[[__selectedProject]]">
+      </elliott-project-popup>
+    </div>
+
+    <div class="separator"></div>
+    
+    <elliott-resume-section last-updated="[[lastUpdated]]"></elliott-resume-section>
+  </div>
+</template>
+
+<script>
+  class MainPage extends Polymer.Element {
+    static get is() { return 'elliott-main-page' }
+
+    static get config() {
+      let props = {
+        properties: {
+          lastUpdated: {
+            type: Number,
+            value: "September 2015"
+          },
+
+          age: {
+            type: Number,
+            value: 22
+          },
+
+          pc: {
+            type: Object,
+            value: {
+              photographer: 'Andre',
+              website: 'http://andreaboulian.com'
+            }
+          },
+
+          __projectData: {
+            type: Object
+          },
+
+          __selectedProject: {
+            type: Object
+          }
+        }
+      }
+
+      return props;
+    }
+
+    _setSelectedProject(event) {
+      this.__selectedProject = event.detail;
+      event.stopPropagation();
+    }
+  }
+
+  customElements.define(MainPage.is, MainPage);
+</script>
+</dom-module>
