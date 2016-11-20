@@ -3,5 +3,12 @@
   "shell": "index.html",
   "fragments": [
     "src/font.css"
+  ],
+  "sourceGlobs": [
+    "assets/**/**"
+  ],
+  "includeDependencies": [
+    "manifest.json",
+    "bower_components/webcomponentsjs/webcomponents-lite.js"
   ]
 }
