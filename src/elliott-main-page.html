@@ -1,0 +1,105 @@
+<link rel="import" href="elliott-top-bar.html">
+<link rel="import" href="elliott-about-me.html">
+<link rel="import" href="elliott-projects.html">
+<link rel="import" href="elliott-project-popup.html">
+<link rel="import" href="elliott-shared-styles.html">
+<link rel="import" href="elliott-resume-section.html">
+
+
+<dom-module id="elliott-main-page">
+<template>
+  <style>
+    .mainContent {
+      min-width: 790px;
+      width: 80%;
+      margin: 0 auto;
+      margin-top: 2em;
+    }
+
+    .separator {
+      height: 0px;
+      border: solid black 1px;
+      margin: 2em 0 2em 0;
+    }
+
+    #projectsWrapper {
+      position: relative;
+    }
+  </style>
+  
+  <elliott-top-bar></elliott-top-bar>
+  <div class="mainContent">
+    <elliott-about-me age="[[age]]" pc="[[pc]]"></elliott-about-me>
+
+    <div class="separator"></div>
+  </div>
+
+  <div id="projectsWrapper">
+    <elliott-project-popup
+        hidden
+        id="projectPopup"
+        project="[[__selectedProject]]">
+    </elliott-project-popup>
+    <div class="mainContent">
+      <elliott-projects
+          on-elliott-project-card-click="_setSelectedProject"
+          id="myProjects"
+          projects="[[projects]]">
+      </elliott-projects>
+    </div>
+  </div>
+
+  <div class="mainContent">
+    <div class="separator"></div>
+    
+    <elliott-resume-section last-updated="[[lastUpdated]]"></elliott-resume-section>
+  </div>
+</template>
+
+<script>
+  var isChrome = !!window.chrome && !!window.chrome.webstore;
+  if (isChrome) {
+    warning.parentNode.removeChild(warning);
+  }
+  class MainPage extends Polymer.Element {
+    static get is() { return 'elliott-main-page' }
+
+    static get config() {
+      let props = {
+        properties: {
+          lastUpdated: {
+            type: Number,
+            value: 'September 2015'
+          },
+
+          age: {
+            type: Number,
+            value: 22
+          },
+
+          pc: {
+            type: Object,
+            value: {
+              photographer: 'Sean Ebsworth Barnes',
+              website: 'http://www.seanebsworthbarnes.com/Clients/Google-Polymer-London-2016/Keynotes-Monday-Polymer16/n-x6mZp5/i-44ZTM88'
+            }
+          },
+
+          __selectedProject: {
+            type: Object
+          }
+        }
+      }
+
+      return props;
+    }
+
+    _setSelectedProject(event) {
+      this.__selectedProject = event.detail;
+      event.stopPropagation();
+    }
+  }
+
+  customElements.define(MainPage.is, MainPage);
+</script>
+</dom-module>

@@ -1,4 +1,4 @@
-<dom-module id="google-text">
+<dom-module id="elliott-google-text">
 <template>
   <style>
     :host {
@@ -30,8 +30,10 @@
   --><span class="r">e</span><!--
 --></template>
 <script>
-  Polymer({
-    is: 'google-text'
-  });
+  class ElliottGoogleText extends Polymer.Element {
+    static get is() { return 'elliott-google-text' }
+  }
+
+  customElements.define(ElliottGoogleText.is, ElliottGoogleText)
 </script>
 </dom-module>

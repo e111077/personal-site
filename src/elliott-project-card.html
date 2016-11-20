@@ -1,0 +1,73 @@
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
+
+<dom-module id="elliott-project-card">
+<template>
+  <style>
+    :host {
+      z-index: 2;
+      will-change: transform;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    #wrapper {
+      margin: 2px 2px 2px 2px;
+      border: solid black 1px;
+      height: 200px;
+      width: 200px;
+      cursor: pointer;
+      cursor: hand;
+      padding: 18px;
+      background-color: white;
+    }
+
+    iron-image {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+  
+  <div id="wrapper">
+    <iron-image id="image" src="/assets/[[project.img]]" sizing="contain"></iron-image>
+  </div>
+</template>
+<script>
+  class ElliottProjectCard extends Polymer.Element {
+    static get is() { return 'elliott-project-card'}
+
+    static get config() {
+      let props = {
+        properties: {
+          project: {
+            type: Object
+          }
+        }
+      }
+
+      return props;
+    }
+
+    ready() {
+      this.addEventListener('click', e => this._onClick(e));
+      super.ready();
+    }
+
+    _onClick() {
+      this.project.element = this;
+      
+      let event = new CustomEvent('elliott-project-card-click', {
+        bubbles: true,
+        cancelable: true,
+        composed: true,
+        detail: this.project
+      });
+
+      this.dispatchEvent(event);
+    }
+  }
+
+  customElements.define(ElliottProjectCard.is, ElliottProjectCard);
+</script>
+</dom-module>

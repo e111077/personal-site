@@ -5,6 +5,6 @@
   "display": "standalone",
   "default_locale": "en",
   "icons": {
-    "256": "src/img/favicon.ico"
+    "256": "assets/img/favicon.ico"
   }
 }

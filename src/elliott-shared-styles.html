@@ -1,20 +1,18 @@
-<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
-
-<dom-module id="shared-styles">
+<dom-module id="elliott-shared-styles">
   <template>
-    <style is="custom-style" include="iron-flex iron-flex-alignment">
+    <style>
       :host {
-        --main-font: ElliScript;
+        --main-font: ElliScript, "Comic Sans MS", cursive, sans-serif;
 
         --title-font: {
-          font-family: ElliScript;
+          font-family: var(--main-font);
           font-size: 3em;
           text-align: center;
         }
       }
 
       .title {
-        @apply(--title-font);
+        @apply --title-font;
       }
 
       .big.title {
@@ -32,9 +30,4 @@
       }
     </style>
   </template>
-  <script>
-    Polymer({
-      is: 'shared-styles'
-    });
-  </script>
 </dom-module>
