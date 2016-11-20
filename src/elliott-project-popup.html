@@ -114,6 +114,10 @@
       }
 
       connectedCallback() {
+        if (!this.animate) {
+          Polymer.Base.importHref(this.resolveUrl('web-animations.html'), null, null, true);
+        }
+
         window.addEventListener('resize', this.__onResize.bind(this));
         requestAnimationFrame(_ => {
           this.__onResize();
@@ -134,6 +138,15 @@
         let deltaTop = popupRect.top - fromRect.top + (popupRect.height - fromRect.height) * .5;
         let scaleWidth = popupRect.width / fromRect.width;
         let scaleHeight = popupRect.height / fromRect.height;
+        let rippleDuration = 300;
+        let delay = 200;
+        let popupDuration = rippleDuration - delay;
+
+        setTimeout(() => {
+          document.body.style.overflow = null;
+          document.getElementById('wrapper').style.overflow = null;
+          this.$.ripple.setAttribute('hidden', true);
+        }, rippleDuration - 10);
 
         this.$.ripple.animate([
           {
@@ -145,13 +158,14 @@
             height: '1px',
             easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
           }
-        ], 300).onfinish = () => {
-          document.body.style.overflow = null;
-          wrapper.style.overflow = null;
-          this.$.ripple.setAttribute('hidden', true);
-        }
+        ], rippleDuration);
 
         setTimeout(() => {
+          setTimeout(() => {
+            popup.setAttribute('hidden', true);
+            this.setAttribute('hidden', true);
+          }, popupDuration - 10);
+
           popup.animate([
             {
               transform: `none`,
@@ -161,20 +175,17 @@
               transform: `translate(${-deltaLeft}px, ${-deltaTop}px) scale(${1/scaleWidth}, ${1/scaleHeight})`,
               zIndex: 4
             }
-          ], 200).onfinish = () => {
-            popup.setAttribute('hidden', true);
-            this.setAttribute('hidden', true);
-          }
-        }, 300);
+          ], popupDuration);
+        }, delay);
       }
 
       showPopup() {
         this.removeAttribute('hidden');
         this.$.popup.removeAttribute('hidden');
         this.$.ripple.removeAttribute('hidden');
-
-        window.scrollTo({
-          left:0,
+        
+        var a = scrollTo({
+          left: 0,
           top: this.parentNode.offsetTop,
           behavior:'smooth'
         });
@@ -200,17 +211,26 @@
         let rippleLeft = from.offsetLeft + from.offsetWidth * .5;
         let rippleTop = from.offsetTop + from.offsetHeight * .5;
         let ripplePosition = this.__calculateRipplePosition();
+        let rippleDuration = 750;
+        let delay = 200;
+        let popupDuration = rippleDuration - delay;
 
         ripple.style.left = `${rippleLeft}px`;
         ripple.style.top = `${rippleTop}px`;
         from.style.zIndex = 4;
         document.body.style.overflow = 'hidden';
-        wrapper.style.overflow = 'hidden';
+        document.getElementById('wrapper').style.overflow = 'hidden';
 
         this.removeAttribute('hidden');        
         ripple.removeAttribute('hidden');
 
-        
+        // timeouts needed workaround a bug with the web animations polyfill
+        setTimeout(() => {
+          this.$.ripple.style.width = `${ripplePosition.diameter}px`;
+          this.$.ripple.style.height = `${ripplePosition.diameter}px`;
+          this.$.ripple.style.left = `${ripplePosition.left}px`;
+          this.$.ripple.style.top = `${ripplePosition.top}px`;
+        }, rippleDuration - 10)
 
         ripple.animate([
           {
@@ -218,19 +238,24 @@
             height: '1px',
             easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
           }, {
-            width: `${1.5*ripplePosition.diameter}px`,
-            height: `${1.5*ripplePosition.diameter}px`,
+            width: `${1.7*ripplePosition.diameter}px`,
+            height: `${1.7*ripplePosition.diameter}px`,
             easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
           }
-        ], 750).onfinish = () => {
-          this.$.ripple.style.width = `${ripplePosition.diameter}px`;
-          this.$.ripple.style.height = `${ripplePosition.diameter}px`;
-          this.$.ripple.style.left = `${ripplePosition.left}px`;
-          this.$.ripple.style.top = `${ripplePosition.top}px`;
-        }
+        ], rippleDuration)
 
         setTimeout(() => {
           from.$.image.setAttribute('hidden', true);
+
+          setTimeout(() => {
+            from.style.zIndex = null;
+            popup.removeAttribute('hidden');
+
+            setTimeout(() => {
+              from.$.image.removeAttribute('hidden');
+            }, 100);
+          }, popupDuration - 10);
+
           from.animate([
             {
               transform: `none`,
@@ -239,12 +264,8 @@
               transform: `translate(${deltaLeft}px, ${deltaTop}px) scale(${scaleWidth}, ${scaleHeight})`,
               zIndex: 4
             }
-          ], 550).onfinish = () => {
-            from.style.zIndex = null;
-            popup.removeAttribute('hidden');
-            from.$.image.removeAttribute('hidden');
-          }
-        }, 200);
+          ], popupDuration)
+        }, delay);
       }
       
       _projectChanged() {
