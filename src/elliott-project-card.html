@@ -5,7 +5,13 @@
   <style>
     :host {
       z-index: 2;
+      will-change: transform;
     }
+
+    [hidden] {
+      display: none !important;
+    }
+
     #wrapper {
       margin: 2px 2px 2px 2px;
       border: solid black 1px;
@@ -24,7 +30,7 @@
   </style>
   
   <div id="wrapper">
-    <iron-image src="/assets/[[project.img]]" sizing="contain"></iron-image>
+    <iron-image id="image" src="/assets/[[project.img]]" sizing="contain"></iron-image>
   </div>
 </template>
 <script>
@@ -49,6 +55,8 @@
     }
 
     _onClick() {
+      this.project.element = this;
+      
       let event = new CustomEvent('elliott-project-card-click', {
         bubbles: true,
         cancelable: true,

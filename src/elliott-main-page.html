@@ -12,7 +12,7 @@
 <dom-module id="elliott-main-page">
 <template>
   <style>
-    #mainContent {
+    .mainContent {
       min-width: 790px;
       width: 80%;
       margin: 0 auto;
@@ -23,6 +23,10 @@
       height: 0px;
       border: solid black 1px;
       margin: 2em 0 2em 0;
+    }
+
+    #projectsWrapper {
+      position: relative;
     }
   </style>
 
@@ -40,23 +44,28 @@
   </app-route>
   
   <elliott-top-bar></elliott-top-bar>
-  <div id="mainContent">
+  <div class="mainContent">
     <elliott-about-me age="[[age]]" pc="[[pc]]"></elliott-about-me>
 
     <div class="separator"></div>
+  </div>
 
-    <div id="projectsSection">
+  <div id="projectsWrapper">
+    <elliott-project-popup
+        hidden
+        id="projectPopup"
+        project="[[__selectedProject]]">
+    </elliott-project-popup>
+    <div class="mainContent">
       <elliott-projects
           on-elliott-project-card-click="_setSelectedProject"
           id="myProjects"
           projects="[[projects]]">
       </elliott-projects>
-      <elliott-project-popup
-          id="projectPopup"
-          project="[[__selectedProject]]">
-      </elliott-project-popup>
     </div>
+  </div>
 
+  <div class="mainContent">
     <div class="separator"></div>
     
     <elliott-resume-section last-updated="[[lastUpdated]]"></elliott-resume-section>
@@ -72,7 +81,7 @@
         properties: {
           lastUpdated: {
             type: Number,
-            value: "September 2015"
+            value: 'September 2015'
           },
 
           age: {

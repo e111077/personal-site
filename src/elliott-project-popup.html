@@ -1,4 +1,5 @@
 <link rel="import" href="elliott-shared-styles.html">
+<link rel="import" href="smoothscroll.html">
 
 <link rel="import" href="../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../bower_components/marked-element/marked-element.html">
@@ -8,30 +9,47 @@
   <template>
     <custom-style>
       <style include="elliott-shared-styles">
+        :host([hidden]), [hidden] {
+          display: none !important;
+        }
+
         :host {
+          position: absolute;
+          justify-content: center;
+          width: 100%;
+          height: 100%;
           font-family: var(--main-font);
           font-size: 2em;
-          z-index: 3;
-          border: solid black 1px;
+          z-index: 4;
         }
 
         #wrapper {
+          height: 100%;
+          position: relative;
           background-color: transparent;
-          border: solid black 1px;
+          align-items: center;
         }
 
-        #background {
-          width: 100%;
-          height: 100%;
+        #ripple {
+          transform: translate(-50%, -50%);
+          width: 1px;
+          height: 1px;
+          border-radius: 50%;
+          left:50%;
+          top:50%;
           background-color: black;
           position: absolute;
+          will-change: width, height;
         }
 
         #popup {
+          position: absolute;
+          border: 1px black solid;
           background-color: white;
           padding: 20px;
           max-width: 80%;
           display: flex;
+          z-index: 1;
         }
 
         #title {
@@ -57,8 +75,8 @@
     </custom-style>
 
     <div id="wrapper" on-click="closePopup">
-      <!--<div id="background"></div>-->
-      <div id="popup" on-click="_stopClick">
+      <div hidden id="ripple"></div>
+      <div hidden id="popup" on-click="_stopClick">
         <div id="imgWrap">
           <iron-image
               id="image"
@@ -95,20 +113,207 @@
         return props;
       }
 
-      _projectChanged() {
-        this.showPopup();
+      connectedCallback() {
+        window.addEventListener('resize', this.__onResize.bind(this));
+        requestAnimationFrame(_ => {
+          this.__onResize();
+        });
       }
 
       closePopup() {
-        this.fire('close-popup');
+        let ripplePosition = this.__calculateRipplePosition();
+        this.$.ripple.style.left = `${ripplePosition.left}px`;
+        this.$.ripple.style.top = `${ripplePosition.top}px`;
+
+        let from = this.project.element;
+        let fromRect = from.getBoundingClientRect();
+        let popup = this.$.popup;
+        let popupRect = popup.getBoundingClientRect();
+
+        let deltaLeft = popupRect.left - fromRect.left + (popupRect.width - fromRect.width) * .5;
+        let deltaTop = popupRect.top - fromRect.top + (popupRect.height - fromRect.height) * .5;
+        let scaleWidth = popupRect.width / fromRect.width;
+        let scaleHeight = popupRect.height / fromRect.height;
+
+        this.$.ripple.animate([
+          {
+            width: `${ripplePosition.diameter}px`,
+            height: `${ripplePosition.diameter}px`,
+            easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
+          }, {
+            width: '1px',
+            height: '1px',
+            easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
+          }
+        ], 300).onfinish = () => {
+          document.body.style.overflow = null;
+          wrapper.style.overflow = null;
+          this.$.ripple.setAttribute('hidden', true);
+        }
+
+        setTimeout(() => {
+          popup.animate([
+            {
+              transform: `none`,
+              zIndex: 4
+            },
+            {
+              transform: `translate(${-deltaLeft}px, ${-deltaTop}px) scale(${1/scaleWidth}, ${1/scaleHeight})`,
+              zIndex: 4
+            }
+          ], 200).onfinish = () => {
+            popup.setAttribute('hidden', true);
+            this.setAttribute('hidden', true);
+          }
+        }, 300);
       }
 
       showPopup() {
+        this.removeAttribute('hidden');
+        this.$.popup.removeAttribute('hidden');
+        this.$.ripple.removeAttribute('hidden');
 
+        window.scrollTo({
+          left:0,
+          top: this.parentNode.offsetTop,
+          behavior:'smooth'
+        });
+
+        let popupPosition = this.__calculatePopupPosition();
+        this.$.popup.style.left = `${popupPosition.left}px`;
+        this.$.popup.style.top = `${popupPosition.top}px`;
+
+        let from = this.project.element;
+        let fromRect = from.getBoundingClientRect();
+        let popup = this.$.popup;
+        let popupRect = popup.getBoundingClientRect();
+        let ripple = this.$.ripple;
+
+        this.setAttribute('hidden', true);
+        popup.setAttribute('hidden', true);
+        ripple.setAttribute('hidden', true);
+
+        let deltaLeft = popupRect.left - fromRect.left + (popupRect.width - fromRect.width) * .5;
+        let deltaTop = popupRect.top - fromRect.top + (popupRect.height - fromRect.height) * .5;
+        let scaleWidth = popupRect.width / fromRect.width;
+        let scaleHeight = popupRect.height / fromRect.height;
+        let rippleLeft = from.offsetLeft + from.offsetWidth * .5;
+        let rippleTop = from.offsetTop + from.offsetHeight * .5;
+        let ripplePosition = this.__calculateRipplePosition();
+
+        ripple.style.left = `${rippleLeft}px`;
+        ripple.style.top = `${rippleTop}px`;
+        from.style.zIndex = 4;
+        document.body.style.overflow = 'hidden';
+        wrapper.style.overflow = 'hidden';
+
+        this.removeAttribute('hidden');        
+        ripple.removeAttribute('hidden');
+
+        
+
+        ripple.animate([
+          {
+            width: '1px',
+            height: '1px',
+            easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
+          }, {
+            width: `${1.5*ripplePosition.diameter}px`,
+            height: `${1.5*ripplePosition.diameter}px`,
+            easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
+          }
+        ], 750).onfinish = () => {
+          this.$.ripple.style.width = `${ripplePosition.diameter}px`;
+          this.$.ripple.style.height = `${ripplePosition.diameter}px`;
+          this.$.ripple.style.left = `${ripplePosition.left}px`;
+          this.$.ripple.style.top = `${ripplePosition.top}px`;
+        }
+
+        setTimeout(() => {
+          from.$.image.setAttribute('hidden', true);
+          from.animate([
+            {
+              transform: `none`,
+              zIndex: 4
+            }, {
+              transform: `translate(${deltaLeft}px, ${deltaTop}px) scale(${scaleWidth}, ${scaleHeight})`,
+              zIndex: 4
+            }
+          ], 550).onfinish = () => {
+            from.style.zIndex = null;
+            popup.removeAttribute('hidden');
+            from.$.image.removeAttribute('hidden');
+          }
+        }, 200);
+      }
+      
+      _projectChanged() {
+        if (this.project) {
+          this.showPopup();
+        }
       }
 
       _stopClick(evt) {
         evt.stopPropagation();
+      }
+
+      __onResize() {
+        if (this.hidden) {
+          return;
+        }
+
+        let ripplePosition = this.__calculateRipplePosition();
+        this.$.ripple.style.width = `${ripplePosition.diameter}px`;
+        this.$.ripple.style.height = `${ripplePosition.diameter}px`;
+        this.$.ripple.style.left = `${ripplePosition.left}px`;
+        this.$.ripple.style.top = `${ripplePosition.top}px`;
+        
+        
+        let popupPosition = this.__calculatePopupPosition();
+        this.$.popup.style.left = `${popupPosition.left}px`;
+        this.$.popup.style.top = `${popupPosition.top}px`;
+      }
+
+      __calculateRipplePosition() {
+        let viewportWidth = Math.min(document.documentElement.clientWidth, window.innerWidth || 0);
+        let viewportHeight = Math.min(document.documentElement.clientHeight, window.innerHeight || 0);
+
+        let midX = viewportWidth * 0.5;
+        let midY = viewportHeight * 0.5;
+
+        let rX = Math.max(midX, window.innerWidth - midX);
+        let rY = Math.max(midY, window.innerHeight - midY);
+
+        rX = Math.max(rX, rY);
+        rY = rX;
+
+        let radius = Math.sqrt(rX * rX + rY * rY);
+        let diameter = radius * 2;
+        
+        let left = midX;
+        let top = midY;
+        return {diameter: diameter, left: left, top: top};
+      }
+
+      __calculatePopupPosition() {
+        let viewportWidth = Math.min(document.documentElement.clientWidth, window.innerWidth || 0);
+        let viewportHeight = Math.min(document.documentElement.clientHeight, window.innerHeight || 0);
+        let popup = this.$.popup;
+        let popupRect = popup.getBoundingClientRect();
+        let maxHeight = viewportHeight * .8;
+
+        if (popupRect.height > maxHeight) {
+          popup.style.maxHeight = `${viewportHeight * .8}px`;
+          popup.style.overflowY = 'scroll';
+          popupRect = popup.getBoundingClientRect();
+        } else {
+          popup.style.overflowY = null;
+        }
+
+        let left = (viewportWidth - popupRect.width) / 2;
+        let top = (viewportHeight - popupRect.height) / 2;
+
+        return {left: left, top: top};
       }
     }
     
