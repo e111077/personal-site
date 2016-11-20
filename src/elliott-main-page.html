@@ -1,6 +1,3 @@
-<link rel="import" href="../bower_components/app-route/app-location.html">
-<link rel="import" href="../bower_components/app-route/app-route.html">
-
 <link rel="import" href="elliott-top-bar.html">
 <link rel="import" href="elliott-about-me.html">
 <link rel="import" href="elliott-projects.html">
@@ -29,19 +26,6 @@
       position: relative;
     }
   </style>
-
-  <app-location route="{{route}}"></app-location>
-  <app-route
-      route="{{route}}"
-      pattern="/:name"
-      data="{{selectedPage}}"
-      tail="{{tail}}">
-  </app-route>
-  <app-route
-      route="{{tail}}"
-      pattern="/:projectName"
-      data="{{__projectData}}">
-  </app-route>
   
   <elliott-top-bar></elliott-top-bar>
   <div class="mainContent">
@@ -95,10 +79,6 @@
               photographer: 'Andre',
               website: 'http://andreaboulian.com'
             }
-          },
-
-          __projectData: {
-            type: Object
           },
 
           __selectedProject: {
