@@ -8,14 +8,9 @@
   <link rel="icon" type="image/ico" href="/assets/img/favicon.ico">
 
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="bower_components/polymer/polymer.html">
+  <link r="import" href="bower_components/polymer/polymer.html">
   <link rel="import" href="src/elliott-main-page.html">
   <style>
-    @font-face {
-      font-family: ElliScript;
-      src: url(/assets/files/ElliScript.ttf);
-    }
-
     body {
       margin: 0 0 0 0;
       min-width: 790px;
@@ -32,6 +27,21 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-49979467-3', 'auto');
       ga('send', 'pageview');
+
+      // async load font
+      window.onload = function() {
+        var url = '/src/font.css';
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            var style = document.createElement('style');
+            style.innerHTML = xhr.responseText;
+            document.head.appendChild(style);
+          }
+        };
+        xhr.send();
+      }
     </script>
 </body>
 </html>
