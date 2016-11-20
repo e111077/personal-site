@@ -57,6 +57,12 @@
 </template>
 
 <script>
+  var isChrome = !!window.chrome && !!window.chrome.webstore;
+  if (!isChrome) {
+    this.parentNode.removeChild(this);
+  } else {
+    warning.parentNode.removeChild(warning);
+  }
   class MainPage extends Polymer.Element {
     static get is() { return 'elliott-main-page' }
 
