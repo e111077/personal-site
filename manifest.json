@@ -1,7 +1,7 @@
 {
   "name": "Elliott Marquez",
   "short_name": "Elliott",
-  "start_url": "/main",
+  "start_url": "/about",
   "display": "standalone",
   "default_locale": "en",
   "icons": {
