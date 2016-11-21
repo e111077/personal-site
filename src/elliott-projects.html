@@ -1,10 +1,16 @@
 <link rel="import" href="elliott-project-card.html">
+<link rel="import" href="elliott-project-popup.html">
 <link rel="import" href="elliott-shared-styles.html">
 
 <dom-module id="elliott-projects">
 <template>
   <custom-style>
     <style include="elliott-shared-styles">
+      :host {
+        height: 100vh;
+        width: 100px;
+      }
+
       .contentWrapper {
         padding: 1em;
         width: 80%;
@@ -18,16 +24,27 @@
     </style>
   </custom-style>
 
-  <div class="big title">
-    Projects
-  </div>
+  <elliott-project-popup
+    hidden
+    id="popup"
+    project="[[__selectedProject]]">
+  </elliott-project-popup>
 
-  <div class="contentWrapper">
-    <dom-repeat items="[[projects]]" as="project">
-      <template>
-        <elliott-project-card project="[[project]]"></elliott-project-card>
-      </template>
-    </dom-repeat>
+  <div id="elementWrapper">
+    <div class="big title">
+      Projects
+    </div>
+
+    <div class="contentWrapper">
+      <dom-repeat items="[[projects]]" as="project">
+        <template>
+          <elliott-project-card
+              on-elliott-project-card-click="_setSelectedProject"
+              project="[[project]]">
+          </elliott-project-card>
+        </template>
+      </dom-repeat>
+    </div>
   </div>
 </template>
 
@@ -35,9 +52,17 @@
   class ElliottProjects extends Polymer.Element {
     static get is() { return 'elliott-projects' }
 
+    _setSelectedProject(event) {
+      this.__selectedProject = event.detail;
+      event.stopPropagation();
+    }
+
     static get config() {
       let props = {
         properties: {
+          __selectedProject: {
+            type: Object
+          },
           projects: {
             type: Object,
             value: [

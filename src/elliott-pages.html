@@ -1,0 +1,88 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="elliott-pages">
+  <template>
+    <style>
+      ::slotted(:not(.selected)) {
+        display: none !important;
+      }
+    </style>
+    <slot id="slot"></slot>
+  </template>
+  <script>
+    class ElliottPages extends Polymer.Element {
+      static get is () { return 'elliott-pages' }
+
+      static get config() {
+        let config = {
+          properties: {
+            selected: {
+              type: String,
+              observer: '_select'
+            },
+
+            attribute: {
+              type: String,
+              observer: '_attributeChanged'
+            }
+          }
+        }
+
+        return config;
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        if (this.selected || this.selected === 0) {
+          this._select(this.selected);
+        }
+      }
+
+      _select(newSelected) {
+        let distributedChildren = this.$.slot.assignedNodes();
+        
+        let oldSelectedChild;
+        let newSelectedChild;
+        let i = 0;
+
+        for (let j = 0; j < distributedChildren.length; j++) {
+          let currentChild = distributedChildren[j];
+          if (currentChild.nodeName === '#text') {
+            continue;
+          }
+
+          if (currentChild.classList.contains('selected')) {
+            oldSelectedChild = currentChild;
+            oldSelectedChild.classList.remove('selected');
+          }
+
+          if (this.attribute) {
+            if (currentChild.getAttribute(this.attribute) === this.selected) {
+              newSelectedChild = currentChild;
+            }
+          } else if (i === this.selected) {
+            newSelectedChild = currentChild;
+          }
+
+          if (newSelectedChild) {
+            newSelectedChild.classList.add('selected');
+
+            if (oldSelectedChild) {
+              return;
+            }
+          }
+
+          i++;
+        }
+      }
+
+      _attributeChanged() {
+        if (this.selected || this.selected === 0) {
+          this._select(this.selected);
+        }
+      }
+    }
+
+    customElements.define(ElliottPages.is, ElliottPages);
+  </script>
+</dom-module>

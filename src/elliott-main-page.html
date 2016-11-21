@@ -1,38 +1,52 @@
 <link rel="import" href="elliott-top-bar.html">
-<link rel="import" href="elliott-about-me.html">
-<link rel="import" href="elliott-projects.html">
-<link rel="import" href="elliott-project-popup.html">
+<link rel="import" href="elliott-pages.html">
 <link rel="import" href="elliott-shared-styles.html">
-<link rel="import" href="elliott-resume-section.html">
 
 
 <dom-module id="elliott-main-page">
 <template>
-  <style>
-    .mainContent {
-      min-width: 790px;
-      width: 80%;
-      margin: 0 auto;
-      margin-top: 2em;
-    }
+  <custom-style>
+    <style include="elliott-shared-styles">
+      #controls {
+        display: flex;
+        justify-content: center;
+        margin-top: 16px;
+        margin-bottom: 16px;
+      }
 
-    .separator {
-      height: 0px;
-      border: solid black 1px;
-      margin: 2em 0 2em 0;
-    }
+      .pageButton {
+        margin: 5px;
+        padding: 6px;
+        font-size: 3em;
+        font-family: var(--main-font);
+        cursor: pointer;
+        cursor: hand;
+        border: 1px solid black;
+      }
 
-    #projectsWrapper {
-      position: relative;
-    }
-  </style>
+      .pageButton.selected {
+        background-color: black;
+        color: white;
+      }
+    </style>
+  </custom-style>
   
   <elliott-top-bar></elliott-top-bar>
-  <div class="mainContent">
-    <elliott-about-me age="[[age]]" pc="[[pc]]"></elliott-about-me>
 
-    <div class="separator"></div>
+  <div id="controls">
+    <span class="pageButton selected" on-click="_onControlButtonClick" page="about">about</span>
+    <span class="pageButton" on-click="_onControlButtonClick" page="projects">projects</span>
+    <span class="pageButton" on-click="_onControlButtonClick" page="resume">resume</span>
   </div>
+
+  <elliott-pages id="pages" attribute="name" selected="[[page]]">
+    <elliott-about-me name="about" age="[[age]]" pc="[[pc]]"></elliott-about-me>
+    <elliott-projects
+          id="myProjects"
+          name="projects">
+    </elliott-projects>
+    <elliott-resume-section name="resume" last-updated="[[lastUpdated]]"></elliott-resume-section>
+  </elliott-pages>
 
   <div id="projectsWrapper">
     <elliott-project-popup
@@ -40,27 +54,20 @@
         id="projectPopup"
         project="[[__selectedProject]]">
     </elliott-project-popup>
-    <div class="mainContent">
-      <elliott-projects
-          on-elliott-project-card-click="_setSelectedProject"
-          id="myProjects"
-          projects="[[projects]]">
-      </elliott-projects>
-    </div>
-  </div>
-
-  <div class="mainContent">
-    <div class="separator"></div>
-    
-    <elliott-resume-section last-updated="[[lastUpdated]]"></elliott-resume-section>
-  </div>
 </template>
 
 <script>
-  var isChrome = document.body.animate && !('scrollBehavior' in document.documentElement.style);
+  let isChrome = document.body.animate && !('scrollBehavior' in document.documentElement.style);
   if (isChrome) {
     warning.parentNode.removeChild(warning);
   }
+
+  const PAGE_MAP = {
+    about: 'elliott-about-me.html',
+    projects: 'elliott-projects.html',
+    resume: 'elliott-resume-section.html'
+  };
+
   class MainPage extends Polymer.Element {
     static get is() { return 'elliott-main-page' }
 
@@ -85,8 +92,14 @@
             }
           },
 
-          __selectedProject: {
-            type: Object
+          page: {
+            type: String,
+            value: 'about',
+            observer: '_pageChanged'
+          },
+
+          __isAttached: {
+            type: Boolean
           }
         }
       }
@@ -94,9 +107,28 @@
       return props;
     }
 
-    _setSelectedProject(event) {
-      this.__selectedProject = event.detail;
-      event.stopPropagation();
+    connectedCallback() {
+      super.connectedCallback();
+      this.__isAttached = true;
+
+      if (this.page) {
+        this._pageChanged(this.page);
+      }
+    }
+
+    _pageChanged(newPage) {
+      if (!newPage || !this.__isAttached) {
+        return;
+      }
+
+      this.$.controls.querySelector('.selected').classList.remove('selected');
+      this.$.controls.querySelector(`[page="${newPage}"]`).classList.add('selected');
+      
+      Polymer.Base.importHref(this.resolveUrl(PAGE_MAP[newPage]), null, null, true);
+    }
+
+    _onControlButtonClick(event) {
+      this.page = event.target.getAttribute('page');
     }
   }
 
