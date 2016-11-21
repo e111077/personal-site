@@ -19,6 +19,7 @@
     "iron-image": "PolymerElements/iron-image#2.0-preview",
     "iron-pages": "PolymerElements/iron-pages#2.0-preview",
     "marked-element": "PolymerElements/marked-element#2.0-preview",
-    "web-animations-js": "^2.2.2"
+    "web-animations-js": "^2.2.2",
+    "app-route": "PolymerElements/app-route#2.0-preview"
   }
 }

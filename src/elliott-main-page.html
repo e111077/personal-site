@@ -2,6 +2,9 @@
 <link rel="import" href="elliott-pages.html">
 <link rel="import" href="elliott-shared-styles.html">
 
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+
 
 <dom-module id="elliott-main-page">
 <template>
@@ -30,7 +33,10 @@
       }
     </style>
   </custom-style>
-  
+
+  <app-location route="{{route}}"></app-location>
+  <app-route route="{{route}}" pattern="/:page" data="{{data}}">
+
   <elliott-top-bar></elliott-top-bar>
 
   <div id="controls">
@@ -72,7 +78,7 @@
     static get is() { return 'elliott-main-page' }
 
     static get config() {
-      let props = {
+      let configuration = {
         properties: {
           lastUpdated: {
             type: Number,
@@ -92,6 +98,14 @@
             }
           },
 
+          route: {
+            type: Object
+          },
+
+          data: {
+            type: Object
+          },
+
           page: {
             type: String,
             value: 'about',
@@ -101,10 +115,12 @@
           __isAttached: {
             type: Boolean
           }
-        }
+        },
+
+        observers: ['__dataPageChanged(data.page)']
       }
 
-      return props;
+      return configuration;
     }
 
     connectedCallback() {
@@ -117,18 +133,28 @@
     }
 
     _pageChanged(newPage) {
-      if (!newPage || !this.__isAttached) {
+      if (!newPage || !this.__isAttached || !(newPage in PAGE_MAP)) {
         return;
       }
 
       this.$.controls.querySelector('.selected').classList.remove('selected');
       this.$.controls.querySelector(`[page="${newPage}"]`).classList.add('selected');
+
+      if (this.data.page !== newPage) {
+        this.set('data.page', newPage);
+      }
       
       Polymer.Base.importHref(this.resolveUrl(PAGE_MAP[newPage]), null, null, true);
     }
 
     _onControlButtonClick(event) {
       this.page = event.target.getAttribute('page');
+    }
+
+    __dataPageChanged(newPage) {
+      if (this.data.page && this.__isAttached && this.data.page in PAGE_MAP) {
+        this.page = this.data.page;
+      }
     }
   }
 
