@@ -1,0 +1,28 @@
+<link rel="import" href="elliott-shared-styles.html">
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="elliott-blog">
+  <template>
+    <custom-style>
+      <style include="elliott-shared-styles">
+      </style>
+    </custom-style>
+    THIS IS MUH BLARG
+  </template>
+  <script>
+    class ElliottBlog extends Polymer.Element {
+      static get is() { return 'elliott-blog' }
+
+      static get config() {
+        let configuration = {
+
+        }
+
+        return configuration;
+      }
+    }
+
+    customElements.define(ElliottBlog.is, ElliottBlog);
+  </script>
+</dom-module>

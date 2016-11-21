@@ -40,12 +40,14 @@
   <elliott-top-bar></elliott-top-bar>
 
   <div id="controls">
-    <span class="pageButton selected" on-click="_onControlButtonClick" page="about">about</span>
+    <span class="pageButton selected" on-click="_onControlButtonClick" page="BLARG">muh BLARG</span>
+    <span class="pageButton" on-click="_onControlButtonClick" page="about">about</span>
     <span class="pageButton" on-click="_onControlButtonClick" page="projects">projects</span>
     <span class="pageButton" on-click="_onControlButtonClick" page="resume">resume</span>
   </div>
 
   <elliott-pages id="pages" attribute="name" selected="[[page]]">
+    <elliott-blog name="BLARG"></elliott-blog>
     <elliott-about-me name="about" age="[[age]]" pc="[[pc]]"></elliott-about-me>
     <elliott-projects
           id="myProjects"
@@ -71,7 +73,8 @@
   const PAGE_MAP = {
     about: 'elliott-about-me.html',
     projects: 'elliott-projects.html',
-    resume: 'elliott-resume-section.html'
+    resume: 'elliott-resume-section.html',
+    BLARG: 'elliott-blog.html'
   };
 
   class MainPage extends Polymer.Element {
@@ -108,7 +111,7 @@
 
           page: {
             type: String,
-            value: 'about',
+            value: 'BLARG',
             observer: '_pageChanged'
           },
 
