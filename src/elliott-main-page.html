@@ -57,7 +57,7 @@
 </template>
 
 <script>
-  var isChrome = !!window.chrome && !!window.chrome.webstore;
+  var isChrome = document.body.animate && !('scrollBehavior' in document.documentElement.style);
   if (isChrome) {
     warning.parentNode.removeChild(warning);
   }
