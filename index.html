@@ -48,13 +48,15 @@
   <script>
     // async load font
     window.onload = function() {
-      var url = '/src/font.css';
+      var url = '/src/font.html';
       var xhr = new XMLHttpRequest();
       xhr.open('GET', url, true);
       xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
           var style = document.createElement('style');
-          style.innerHTML = xhr.responseText;
+          var pattern = /<style>@font-face.*<\/style>/g;
+          var match = pattern.exec(xhr.responseText);
+          style.innerHTML = xhr.responseText.substring(match.index + 7, pattern.lastIndex - 8);
           document.head.appendChild(style);
         }
       };

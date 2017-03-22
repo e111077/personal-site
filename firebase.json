@@ -3,14 +3,10 @@
     "rules": "database.rules.json"
   },
   "hosting": {
-    "public": "/",
+    "public": "build/default",
     "rewrites": [
       {
-        "source": "/main",
-        "destination": "/index.html"
-      },
-      {
-        "source": "/project/*",
+        "source": "/**",
         "destination": "/index.html"
       }
     ]
