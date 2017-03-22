@@ -1,4 +1,4 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
 
 <dom-module id="elliott-pages">
   <template>
@@ -13,22 +13,18 @@
     class ElliottPages extends Polymer.Element {
       static get is () { return 'elliott-pages' }
 
-      static get config() {
-        let config = {
-          properties: {
-            selected: {
-              type: String,
-              observer: '_select'
-            },
+      static get properties() {
+        return {
+          selected: {
+            type: String,
+            observer: '_select'
+          },
 
-            attribute: {
-              type: String,
-              observer: '_attributeChanged'
-            }
+          attribute: {
+            type: String,
+            observer: '_attributeChanged'
           }
-        }
-
-        return config;
+        };
       }
 
       connectedCallback() {
@@ -40,7 +36,7 @@
 
       _select(newSelected) {
         let distributedChildren = this.children;
-        
+
         let oldSelectedChild;
         let newSelectedChild;
         let i = 0;

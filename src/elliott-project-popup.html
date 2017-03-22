@@ -1,3 +1,4 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="elliott-shared-styles.html">
 <link rel="import" href="smoothscroll.html">
 
@@ -101,17 +102,13 @@
     class ElliottProjectPopup extends Polymer.Element {
       static get is() { return 'elliott-project-popup' }
 
-      static get config() {
-        let props = {
-          properties: {
-            project: {
-              type: Object,
-              observer: '_projectChanged'
-            }
+      static get properties() {
+        return {
+          project: {
+            type: Object,
+            observer: '_projectChanged'
           }
-        }
-
-        return props;
+        };
       }
 
       connectedCallback() {
@@ -184,7 +181,7 @@
         this.removeAttribute('hidden');
         this.$.popup.removeAttribute('hidden');
         this.$.ripple.removeAttribute('hidden');
-        
+
         var a = scrollTo({
           left: 0,
           top: 0,
@@ -222,7 +219,7 @@
         document.body.style.overflow = 'hidden';
         document.getElementById('wrapper').style.overflow = 'hidden';
 
-        this.removeAttribute('hidden');        
+        this.removeAttribute('hidden');
         ripple.removeAttribute('hidden');
 
         // timeouts needed workaround a bug with the web animations polyfill
@@ -268,7 +265,7 @@
           ], popupDuration)
         }, delay);
       }
-      
+
       _projectChanged() {
         if (this.project) {
           this.showPopup();
@@ -289,8 +286,8 @@
         this.$.ripple.style.height = `${ripplePosition.diameter}px`;
         this.$.ripple.style.left = `${ripplePosition.left}px`;
         this.$.ripple.style.top = `${ripplePosition.top}px`;
-        
-        
+
+
         let popupPosition = this.__calculatePopupPosition();
         this.$.popup.style.left = `${popupPosition.left}px`;
         this.$.popup.style.top = `${popupPosition.top}px`;
@@ -311,7 +308,7 @@
 
         let radius = Math.sqrt(rX * rX + rY * rY);
         let diameter = radius * 2;
-        
+
         let left = midX;
         let top = midY;
         return {diameter: diameter, left: left, top: top};
@@ -338,7 +335,7 @@
         return {left: left, top: top};
       }
     }
-    
+
     customElements.define(ElliottProjectPopup.is, ElliottProjectPopup);
   </script>
 </dom-module>

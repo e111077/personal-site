@@ -26,7 +26,7 @@
         }
       </style>
     </custom-style>
-    
+
     <div id="elementWrapper">
       <div class="title">Resume</div>
       <div>
@@ -34,7 +34,7 @@
           <iframe id="resume" src="https://docs.google.com/gview?url=https://elliottmarquez.com/assets/files/resume.pdf&embedded=true" frameborder="0"></iframe>
         </div>
         <div>Direct download <a href="/assets/files/resume.pdf">here</a>.</div>
-        <div>Last updated [[lastUpdated]]</div> 
+        <div>Last updated [[lastUpdated]]</div>
       </div>
     </div>
   </template>
@@ -42,16 +42,12 @@
     class ElliottResumeSection extends Polymer.Element {
       static get is() { return 'elliott-resume-section' }
 
-      static get config() {
-        let props = {
-          properties: {
-            lastUpdated: {
-              type: String
-            }
+      static get properties() {
+        return {
+          lastUpdated: {
+            type: String
           }
-        }
-
-        return props;
+        };
       }
     }
 

@@ -1,3 +1,5 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
 <link rel="import" href="elliott-top-bar.html">
 <link rel="import" href="elliott-pages.html">
 <link rel="import" href="elliott-shared-styles.html">
@@ -35,14 +37,14 @@
   </custom-style>
 
   <app-location route="{{route}}"></app-location>
-  <app-route route="{{route}}" pattern="/:page" data="{{data}}">
+  <app-route route="{{route}}" pattern="/:page" data="{{data}}"></app-route>
 
   <elliott-top-bar></elliott-top-bar>
 
   <div id="controls">
-    <span class="pageButton selected" on-click="_onControlButtonClick" page="about">about</span>
-    <span class="pageButton" on-click="_onControlButtonClick" page="projects">projects</span>
-    <span class="pageButton" on-click="_onControlButtonClick" page="resume">resume</span>
+    <span class="pageButton selected" on-tap="_onControlButtonClick" page="about">about</span>
+    <span class="pageButton" on-tap="_onControlButtonClick" page="projects">projects</span>
+    <span class="pageButton" on-tap="_onControlButtonClick" page="resume">resume</span>
   </div>
 
   <elliott-pages id="pages" attribute="name" selected="[[page]]">
@@ -74,53 +76,51 @@
     resume: 'elliott-resume-section.html'
   };
 
-  class MainPage extends Polymer.Element {
+  class MainPage extends Polymer.GestureEventListeners(Polymer.Element) {
     static get is() { return 'elliott-main-page' }
 
-    static get config() {
-      let configuration = {
-        properties: {
-          lastUpdated: {
-            type: Number,
-            value: 'September 2015'
-          },
+    static get properties() {
+      return {
+        lastUpdated: {
+          type: Number,
+          value: 'September 2015'
+        },
 
-          age: {
-            type: Number,
-            value: 22
-          },
+        age: {
+          type: Number,
+          value: 22
+        },
 
-          pc: {
-            type: Object,
-            value: {
-              photographer: 'Sean Ebsworth Barnes',
-              website: 'http://www.seanebsworthbarnes.com/Clients/Google-Polymer-London-2016/Keynotes-Monday-Polymer16/n-x6mZp5/i-44ZTM88'
-            }
-          },
-
-          route: {
-            type: Object
-          },
-
-          data: {
-            type: Object
-          },
-
-          page: {
-            type: String,
-            value: 'about',
-            observer: '_pageChanged'
-          },
-
-          __isAttached: {
-            type: Boolean
+        pc: {
+          type: Object,
+          value: {
+            photographer: 'Sean Ebsworth Barnes',
+            website: 'http://www.seanebsworthbarnes.com/Clients/Google-Polymer-London-2016/Keynotes-Monday-Polymer16/n-x6mZp5/i-44ZTM88'
           }
         },
 
-        observers: ['__dataPageChanged(data.page)']
-      }
+        route: {
+          type: Object
+        },
 
-      return configuration;
+        data: {
+          type: Object
+        },
+
+        page: {
+          type: String,
+          value: 'about',
+          observer: '_pageChanged'
+        },
+
+        __isAttached: {
+          type: Boolean
+        }
+      };
+    }
+
+    static get observers() {
+      return ['__dataPageChanged(data.page)'];
     }
 
     connectedCallback() {
@@ -143,7 +143,7 @@
       if (this.data.page !== newPage) {
         this.set('data.page', newPage);
       }
-      
+
       Polymer.Base.importHref(this.resolveUrl(PAGE_MAP[newPage]), null, null, true);
     }
 

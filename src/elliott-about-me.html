@@ -1,3 +1,5 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
 <link rel="import" href="elliott-shared-styles.html">
 <link rel="import" href="elliott-google-text.html">
 
@@ -117,21 +119,17 @@
 <script>
   class ElliottAboutMe extends Polymer.Element {
     static get is() { return 'elliott-about-me' }
-    
-    static get config() {
-      let props = {
-        properties: {
-          pc: {
-            type: Object
-          },
 
-          age: {
-            type: Number
-          }
+    static get properties() {
+      return {
+        pc: {
+          type: Object
+        },
+
+        age: {
+          type: Number
         }
       };
-
-      return props;
     }
   }
 

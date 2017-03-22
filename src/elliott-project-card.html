@@ -28,7 +28,7 @@
       height: 100%;
     }
   </style>
-  
+
   <div id="wrapper">
     <iron-image id="image" src="/assets/[[project.img]]" sizing="contain"></iron-image>
   </div>
@@ -37,16 +37,12 @@
   class ElliottProjectCard extends Polymer.Element {
     static get is() { return 'elliott-project-card'}
 
-    static get config() {
-      let props = {
-        properties: {
-          project: {
-            type: Object
-          }
+    static get properties() {
+      return {
+        project: {
+          type: Object
         }
-      }
-
-      return props;
+      };
     }
 
     ready() {
@@ -56,7 +52,7 @@
 
     _onClick() {
       this.project.element = this;
-      
+
       let event = new CustomEvent('elliott-project-card-click', {
         bubbles: true,
         cancelable: true,
