@@ -4,7 +4,11 @@
   "start_url": "/",
   "display": "standalone",
   "default_locale": "en",
+  "background_color": "#000000",
+  "theme_color": "#000000",
   "icons": {
-    "256": "assets/img/favicon.ico"
+    "144": "/assets/img/favicon144.png",
+    "192": "/assets/img/favicon192.png",
+    "256": "/assets/img/favicon255.png"
   }
 }

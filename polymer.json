@@ -1,6 +1,6 @@
 {
   "entrypoint": "index.html",
-  "shell": "src/elliott-main-page.html",
+  "shell": "index.html",
   "builds": [{
     "js": {
       "minify": true,
@@ -8,7 +8,7 @@
     },
     "css": { "minify": true },
     "html": { "minify": true },
-    "bundle": true,
+    "bundle": false,
     "addServiceWorker": true
   }],
   "fragments": [
@@ -22,7 +22,8 @@
   ],
   "extraDependencies": [
     "manifest.json",
-    "bower_components/webcomponentsjs/webcomponents-lite.js"
+    "bower_components/webcomponentsjs/webcomponents-lite.js",
+    "bower_components/webcomponentsjs/webcomponents-lite.js.map"
   ],
   "lint": {
     "rules": ["polymer-2"]
