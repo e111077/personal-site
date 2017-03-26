@@ -1,0 +1,31 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
+<link rel="import" href="../bower_components/marked-element/marked-element.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+
+<dom-module id="elliott-post-page">
+  <template>
+    <iron-pages
+        attr-for-selected="status"
+        selected=[[_isLoading(loading)]]
+        fallback-selection="loading">
+      <div status="loading">
+        loading pageFASDJFKLSJDFALK
+      </div>
+      <marked-element status="loaded" markdown="[[markdown]]">
+        <div slot="markdown-html"></div>
+      </marked-element>
+    </iron-pages>
+  </template>
+  <script>
+    class ElliottPostPage extends Polymer.GestureEventListeners(Polymer.Element) {
+      static get is() { return 'elliott-post-page' }
+
+      _isLoading() {
+        return this.loading ? 'loading' : 'loaded';
+      }
+    }
+
+    customElements.define(ElliottPostPage.is, ElliottPostPage);
+  </script>
+</dom-module>

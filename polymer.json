@@ -1,6 +1,6 @@
 {
   "entrypoint": "index.html",
-  "shell": "index.html",
+  "shell": "src/elliott-main-page.html",
   "builds": [
     {
       "js": {
@@ -17,9 +17,7 @@
       "addServiceWorker": true
     }
   ],
-  "fragments": [
-    "src/font.html"
-  ],
+  "fragments": [],
   "sources": [
     "assets/**/**"
   ],
