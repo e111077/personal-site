@@ -11,7 +11,7 @@
        :host {
         --main-font: ElliScript, "Comic Sans MS", cursive, sans-serif;
       }
-      
+
       #headerBar {
         font-family: var(--main-font);
         background-color: black;
@@ -31,13 +31,13 @@
         float: right;
       }
 
-      #headerBar a {
-        color: white;
-      }
-
       a {
         color: black;
         text-decoration: none;
+      }
+
+      #headerBar * {
+        color: white;
       }
 
       a:hover {
@@ -51,13 +51,25 @@
         margin: 0 auto;
         margin-top: 1em;
       }
+
+      #back-icon {
+        float: left;
+        margin-left: .5em;
+      }
+
+      #back-icon:hover {
+        text-decoration: none;
+      }
     </style>
 
     <iron-location
         path="{{path}}">
     </iron-location>
 
-    <div id="headerBar"><a href="/">Elliott Marquez</a></div>
+    <div id="headerBar">
+      <a href="/main" id="back-icon" hidden$="[[!_isBackVisible(page)]]">&lt;</a>
+      <a href="/">Elliott Marquez</a>
+    </div>
 
     <iron-pages attr-for-selected="page" selected="[[page]]" fallback-selection="main">
       <div page="main">
@@ -132,6 +144,10 @@
         if (pathParts.length > 1) {
           this.page = pathParts[1];
         }
+      }
+
+      _isBackVisible() {
+        return this.page !== '' && this.page !== 'main';
       }
     }
 
