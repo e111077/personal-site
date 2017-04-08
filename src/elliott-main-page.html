@@ -1,157 +1,165 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/polymer/lib/elements/custom-style.html">
-<link rel="import" href="../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
-<link rel="import" href="elliott-top-bar.html">
-<link rel="import" href="elliott-pages.html">
-<link rel="import" href="elliott-shared-styles.html">
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../bower_components/iron-location/iron-location.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 
-<link rel="import" href="../bower_components/app-route/app-location.html">
-<link rel="import" href="../bower_components/app-route/app-route.html">
-
+<link rel="import" href="./elliott-post-page.html">
 
 <dom-module id="elliott-main-page">
-<template>
-  <custom-style>
-    <style include="elliott-shared-styles">
-      #controls {
-        display: flex;
-        justify-content: center;
-        margin-top: 16px;
-        margin-bottom: 16px;
+  <template>
+    <style>
+       :host {
+        --main-font: ElliScript, "Comic Sans MS", cursive, sans-serif;
       }
 
-      .pageButton {
-        margin: 5px;
-        padding: 6px;
-        font-size: 3em;
-        font-family: var(--main-font);
-        cursor: pointer;
-        cursor: hand;
-        border: 1px solid black;
-      }
-
-      .pageButton.selected {
+      #headerBar {
         background-color: black;
+        font-size: 3em;
+        padding-top: .3em;
+        padding-bottom: .3em;
+        text-align: center;
+      }
+
+      .postListing {
+        font-size: 2em;
+      }
+
+      .date {
+        color: #AAAAAA;
+        float: right;
+      }
+
+      a {
+        color: black;
+        text-decoration: none;
+      }
+
+      #headerBar * {
         color: white;
       }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        width: 60%;
+        margin: 0 auto;
+        margin-top: 1em;
+      }
+
+      #back-icon {
+        position: absolute;
+        margin-left: .5em;
+        left: 0;
+      }
+
+      #back-icon:hover {
+        text-decoration: none;
+      }
+
+      .elliscript {
+        font-family: var(--main-font);
+      }
     </style>
-  </custom-style>
 
-  <app-location route="{{route}}"></app-location>
-  <app-route route="{{route}}" pattern="/:page" data="{{data}}"></app-route>
+    <iron-location
+        path="{{path}}">
+    </iron-location>
 
-  <elliott-top-bar></elliott-top-bar>
+    <div id="headerBar" class="elliscript">
+      <a href="/main" id="back-icon" hidden$="[[!_isBackVisible(page)]]">&lt;</a>
+      <a href="/">Elliott Marquez</a>
+    </div>
 
-  <div id="controls">
-    <span class="pageButton selected" on-tap="_onControlButtonClick" page="about">about</span>
-    <span class="pageButton" on-tap="_onControlButtonClick" page="projects">projects</span>
-    <span class="pageButton" on-tap="_onControlButtonClick" page="resume">resume</span>
-  </div>
+    <iron-pages attr-for-selected="page" selected="[[page]]" fallback-selection="main">
+      <div page="main">
+        <ul>
+          <dom-repeat items="[[posts]]" as="post">
+            <template>
+              <li class="postListing elliscript">
+                <span><a href$="/post/[[post.filename]]">[[post.title]]</a></span>
+                <span class="date">-[[post.date]]</span>
+              </li>
+            </template>
+          </dom-repeat>
+        </ul>
+      </div>
 
-  <elliott-pages id="pages" attribute="name" selected="[[page]]">
-    <elliott-about-me name="about" age="[[age]]" pc="[[pc]]"></elliott-about-me>
-    <elliott-projects
-          id="myProjects"
-          name="projects">
-    </elliott-projects>
-    <elliott-resume-section name="resume" last-updated="[[lastUpdated]]"></elliott-resume-section>
-  </elliott-pages>
-</template>
+      <elliott-post-page
+          page="post"
+          loading="[[loadingPost]]"
+          markdown="[[postMarkdown]]">
+      </elliott-post-page>
+    </iron-pages>
+  </template>
 
-<script>
-  let isChrome = document.body.animate && !('scrollBehavior' in document.documentElement.style);
-  if (isChrome) {
-    warning.parentNode.removeChild(warning);
-  }
+  <script>
+    class ElliottMainPage extends Polymer.Element {
+      static get is() { return 'elliott-main-page' }
 
-  const PAGE_MAP = {
-    about: 'elliott-about-me.html',
-    projects: 'elliott-projects.html',
-    resume: 'elliott-resume-section.html'
-  };
-
-  class MainPage extends Polymer.GestureEventListeners(Polymer.Element) {
-    static get is() { return 'elliott-main-page' }
-
-    static get properties() {
-      return {
-        lastUpdated: {
-          type: Number,
-          value: 'September 2015'
-        },
-
-        age: {
-          type: Number,
-          value: 22
-        },
-
-        pc: {
-          type: Object,
-          value: {
-            photographer: 'Sean Ebsworth Barnes',
-            website: 'http://www.seanebsworthbarnes.com/Clients/Google-Polymer-London-2016/Keynotes-Monday-Polymer16/n-x6mZp5/i-44ZTM88'
-          }
-        },
-
-        route: {
-          type: Object
-        },
-
-        data: {
-          type: Object
-        },
-
-        page: {
-          type: String,
-          value: 'about',
-          observer: '_pageChanged'
-        },
-
-        __isAttached: {
-          type: Boolean
+      static get properties() {
+        const props = {
+          posts: {
+            type: Array,
+            value: [
+              {
+                title: 'Hello World',
+                filename: 'hello-world',
+                date: 'April 7, 2017'
+              }
+            ]
+          },
+          path: {
+            type: String,
+            observer: '_pathChanged'
+          },
+          hash: String,
+          loadingPost: Boolean,
+          postMarkdown: String,
+          page: String
         }
-      };
-    }
 
-    static get observers() {
-      return ['__dataPageChanged(data.page)'];
-    }
+        return props;
+      }
 
-    connectedCallback() {
-      super.connectedCallback();
-      this.__isAttached = true;
+      _pathChanged() {
+        if (!this.path) { return }
 
-      if (this.page) {
-        this._pageChanged(this.page);
+        let pathParts = this.path.split('/');
+
+        if (pathParts.length > 2 && pathParts[1] == 'post') {
+          this.loadingPost = true;
+
+          if (!window.fetch) {
+            this.postMarkdown = 'Your browser does not support [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). Please use a better browser listed in [this table](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API#Browser_compatibility).'
+            this.loadingPost = false;
+
+          } else {
+            fetch(`/posts/${pathParts[2]}.md`).then(res => {
+              this.postMarkdown = res.text().then(markdown => {
+                this.postMarkdown = markdown;
+                this.loadingPost = false;
+              });
+
+            }).catch(_ => {
+              this.loadingPost = false;
+            });
+          }
+        }
+
+        if (pathParts.length > 1) {
+          this.page = pathParts[1];
+        }
+      }
+
+      _isBackVisible() {
+        return this.page !== '' && this.page !== 'main';
       }
     }
 
-    _pageChanged(newPage) {
-      if (!newPage || !this.__isAttached || !(newPage in PAGE_MAP)) {
-        return;
-      }
-
-      this.$.controls.querySelector('.selected').classList.remove('selected');
-      this.$.controls.querySelector(`[page="${newPage}"]`).classList.add('selected');
-
-      if (this.data.page !== newPage) {
-        this.set('data.page', newPage);
-      }
-
-      Polymer.Base.importHref(this.resolveUrl(PAGE_MAP[newPage]), null, null, true);
-    }
-
-    _onControlButtonClick(event) {
-      this.page = event.target.getAttribute('page');
-    }
-
-    __dataPageChanged(newPage) {
-      if (this.data.page && this.__isAttached && this.data.page in PAGE_MAP) {
-        this.page = this.data.page;
-      }
-    }
-  }
-
-  customElements.define(MainPage.is, MainPage);
-</script>
+    customElements.define(ElliottMainPage.is, ElliottMainPage);
+  </script>
 </dom-module>
