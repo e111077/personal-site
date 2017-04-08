@@ -51,8 +51,9 @@
       }
 
       #back-icon {
-        float: left;
+        position: absolute;
         margin-left: .5em;
+        left: 0;
       }
 
       #back-icon:hover {
@@ -79,7 +80,7 @@
           <dom-repeat items="[[posts]]" as="post">
             <template>
               <li class="postListing elliscript">
-                <span><a href$="/post/[[post.url]]">[[post.title]]</a></span>
+                <span><a href$="/post/[[post.filename]]">[[post.title]]</a></span>
                 <span class="date">-[[post.date]]</span>
               </li>
             </template>
@@ -106,7 +107,7 @@
             value: [
               {
                 title: 'Hello World',
-                url: 'hello-world',
+                filename: 'hello-world',
                 date: 'March 26, 2017'
               }
             ]
