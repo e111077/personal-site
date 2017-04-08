@@ -13,7 +13,6 @@
       }
 
       #headerBar {
-        font-family: var(--main-font);
         background-color: black;
         font-size: 3em;
         padding-top: .3em;
@@ -22,7 +21,6 @@
       }
 
       .postListing {
-        font-family: var(--main-font);
         font-size: 2em;
       }
 
@@ -60,13 +58,17 @@
       #back-icon:hover {
         text-decoration: none;
       }
+
+      .elliscript {
+        font-family: var(--main-font);
+      }
     </style>
 
     <iron-location
         path="{{path}}">
     </iron-location>
 
-    <div id="headerBar">
+    <div id="headerBar" class="elliscript">
       <a href="/main" id="back-icon" hidden$="[[!_isBackVisible(page)]]">&lt;</a>
       <a href="/">Elliott Marquez</a>
     </div>
@@ -76,7 +78,7 @@
         <ul>
           <dom-repeat items="[[posts]]" as="post">
             <template>
-              <li class="postListing">
+              <li class="postListing elliscript">
                 <span><a href$="/post/[[post.url]]">[[post.title]]</a></span>
                 <span class="date">-[[post.date]]</span>
               </li>
