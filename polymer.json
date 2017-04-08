@@ -19,7 +19,8 @@
   ],
   "fragments": [],
   "sources": [
-    "assets/**/**"
+    "assets/**/**",
+    "posts/**"
   ],
   "extraDependencies": [
     "manifest.json",
