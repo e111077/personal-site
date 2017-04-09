@@ -134,7 +134,10 @@
           this.loadingPost = true;
 
           if (!window.fetch) {
-            this.postMarkdown = 'Your browser does not support [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). Please use a better browser listed in [this table](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API#Browser_compatibility).'
+            this.postMarkdown = `Your browser does not support
+            [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
+            Please use a better browser listed in
+            [this table](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API#Browser_compatibility).`
             this.loadingPost = false;
 
           } else {
