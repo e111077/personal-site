@@ -1,0 +1,110 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="elliott-nav-section">
+  <template>
+    <style>
+      header {
+        margin-right: 2em;
+      }
+
+      header, #button-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      button {
+        font-family: var(--main-font, 'Helvetica Neue', Helvetica, Arial, sans-serif);
+        border: solid 1px black;
+        background-color: white;
+        color: black;
+        font-size: 2em;
+        text-align: center;
+        height: 48px;
+        width: 85px;
+        padding: 8px;
+        margin: .15em 0em .15em 0em;
+      }
+
+      button[selected], button:hover {
+        background-color: black;
+        color: white;
+        cursor: pointer;
+        cursor: hand;
+      }
+
+      #avatar {
+        width: 150px;
+      }
+
+      @media (max-width: 600px) {
+        #button-wrapper {
+          flex-direction: row;
+        }
+
+        header {
+          margin-right: 0;
+        }
+
+        button {
+          margin: 0em .15em 0em .15em;
+        }
+      }
+    </style>
+    
+    <header>
+      <span>
+        <img id="avatar" src="../assets/img/avatar-circle.png" alt="my face">
+      </span>
+      <span id="button-wrapper">
+        <a href="/blog"><button name="blog">Blog</button></a>
+        <a href="/about"><button name="about">About</button></a>
+      </span>
+    </header>
+  </template>
+  <script>
+    class ElliottNavSection extends Polymer.Element {
+      static get is() { return 'elliott-nav-section' }
+
+      constructor() {
+        super();
+        this.__pageMap = {
+          '' : 'blog',
+          'blog': 'blog',
+          'post': 'blog',
+          'about': 'about'
+        }
+      }
+     
+      static get properties() {
+        const props = {
+          page: {
+            type: String,
+            observer: '_pageChanged'
+          }
+        }
+
+        return props;
+      }
+
+      _pageChanged(newPage, oldPage) {
+        if (newPage === undefined) {
+          return;
+        }
+
+        newPage = this.__pageMap[newPage];
+        oldPage = this.__pageMap[oldPage];
+
+        if (oldPage !== undefined) {
+          const oldButton = this.root.querySelector(`[name=${oldPage}`);
+          oldButton.removeAttribute('selected')
+        }
+
+        const newButton = this.root.querySelector(`[name=${newPage}]`);
+        newButton.setAttribute('selected', true);
+      }
+    }
+
+    customElements.define(ElliottNavSection.is, ElliottNavSection);
+  </script>
+</dom-module>

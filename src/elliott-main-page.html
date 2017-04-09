@@ -4,6 +4,7 @@
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 
 <link rel="import" href="./elliott-post-page.html">
+<link rel="import" href="./elliott-nav-section.html">
 
 <dom-module id="elliott-main-page">
   <template>
@@ -12,12 +13,17 @@
         --main-font: ElliScript, "Comic Sans MS", cursive, sans-serif;
       }
 
-      #headerBar {
+      #header-bar {
         background-color: black;
         font-size: 3em;
         padding-top: .3em;
         padding-bottom: .3em;
         text-align: center;
+        margin-bottom: .3em;
+      }
+
+      iron-pages {
+        flex-grow: 1;
       }
 
       .postListing {
@@ -34,7 +40,7 @@
         text-decoration: none;
       }
 
-      #headerBar * {
+      #header-bar * {
         color: white;
       }
 
@@ -42,17 +48,22 @@
         text-decoration: underline;
       }
 
+      #body-wrapper {
+        width: 80%;
+        margin: 0 auto;
+        display: flex;
+      }
+
       ul {
         list-style: none;
         padding: 0;
-        width: 60%;
         margin: 0 auto;
         margin-top: 1em;
       }
 
       #back-icon {
-        position: absolute;
         margin-left: .5em;
+        position: absolute;
         left: 0;
       }
 
@@ -63,37 +74,49 @@
       .elliscript {
         font-family: var(--main-font);
       }
+
+      @media (max-width: 600px) {
+        #body-wrapper {
+          display: flex;
+          flex-direction: column;
+          width: 95%;
+        }
+      }
     </style>
 
     <iron-location
         path="{{path}}">
     </iron-location>
 
-    <div id="headerBar" class="elliscript">
-      <a href="/main" id="back-icon" hidden$="[[!_isBackVisible(page)]]">&lt;</a>
-      <a href="/">Elliott Marquez</a>
+    <div id="header-bar" class="elliscript">
+      <a href="/blog" id="back-icon" hidden$="[[!_isBackVisible(page)]]">&lt;</a>
+      <a href="/" id="header-title">Elliott Marquez</a>
     </div>
 
-    <iron-pages attr-for-selected="page" selected="[[page]]" fallback-selection="main">
-      <div page="main">
-        <ul>
-          <dom-repeat items="[[posts]]" as="post">
-            <template>
-              <li class="postListing elliscript">
-                <span><a href$="/post/[[post.filename]]">[[post.title]]</a></span>
-                <span class="date">-[[post.date]]</span>
-              </li>
-            </template>
-          </dom-repeat>
-        </ul>
-      </div>
+    <div id="body-wrapper">
+      <elliott-nav-section page="[[page]]"></elliott-nav-section>
 
-      <elliott-post-page
-          page="post"
-          loading="[[loadingPost]]"
-          markdown="[[postMarkdown]]">
-      </elliott-post-page>
-    </iron-pages>
+      <iron-pages attr-for-selected="page" selected="[[page]]" fallback-selection="blog">
+        <div page="blog">
+          <ul>
+            <dom-repeat items="[[posts]]" as="post">
+              <template>
+                <li class="postListing elliscript">
+                  <span><a href$="/post/[[post.filename]]">[[post.title]]</a></span>
+                  <span class="date">-[[post.date]]</span>
+                </li>
+              </template>
+            </dom-repeat>
+          </ul>
+        </div>
+
+        <elliott-post-page
+            page="post"
+            loading="[[loadingPost]]"
+            markdown="[[postMarkdown]]">
+        </elliott-post-page>
+      </iron-pages>
+    </div>
   </template>
 
   <script>
@@ -159,7 +182,7 @@
       }
 
       _isBackVisible() {
-        return this.page !== '' && this.page !== 'main';
+        return this.page !== '' && this.page !== 'blog';
       }
     }
 
