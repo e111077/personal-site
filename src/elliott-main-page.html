@@ -115,6 +115,12 @@
             loading="[[loadingPost]]"
             markdown="[[postMarkdown]]">
         </elliott-post-page>
+
+        <elliott-post-page
+            page="about"
+            loading="[[loadingPost]]"
+            markdown="[[postMarkdown]]">
+        </elliott-post-page>
       </iron-pages>
     </div>
   </template>
@@ -152,8 +158,13 @@
         if (!this.path) { return }
 
         let pathParts = this.path.split('/');
+        let page;
 
-        if (pathParts.length > 2 && pathParts[1] == 'post') {
+        if (pathParts.length > 1) {
+          page = pathParts[1];
+        }
+
+        if (pathParts.length > 2 && page == 'post' || page == 'about') {
           this.loadingPost = true;
 
           if (!window.fetch) {
@@ -164,12 +175,19 @@
             this.loadingPost = false;
 
           } else {
-            fetch(`/posts/${pathParts[2]}.md`).then(res => {
-              this.postMarkdown = res.text().then(markdown => {
-                this.postMarkdown = markdown;
-                this.loadingPost = false;
-              });
+            let postName = '';
 
+            if (page === 'post') {
+              postName = pathParts[2];
+
+            } else if (page === 'about') {
+              postName = `about-me`
+            }
+            fetch(`/posts/${postName}.md`).then(res => {
+              return res.text();
+            }).then(markdown => {
+              this.postMarkdown = markdown;
+              this.loadingPost = false;
             }).catch(_ => {
               this.loadingPost = false;
             });
@@ -177,7 +195,7 @@
         }
 
         if (pathParts.length > 1) {
-          this.page = pathParts[1];
+          this.page = page;
         }
       }
 

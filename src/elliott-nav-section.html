@@ -80,7 +80,8 @@
         const props = {
           page: {
             type: String,
-            observer: '_pageChanged'
+            observer: '_pageChanged',
+            value: 'blog'
           }
         }
 
@@ -94,6 +95,7 @@
 
         newPage = this.__pageMap[newPage];
         oldPage = this.__pageMap[oldPage];
+
 
         if (oldPage !== undefined) {
           const oldButton = this.root.querySelector(`[name=${oldPage}`);
