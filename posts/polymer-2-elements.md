@@ -20,8 +20,6 @@ We've been receiving a few requests for a list of elements that support Polymer 
 * [iron-dropdown](https://github.com/PolymerElements/iron-dropdown/tree/2.0-preview)
 * [iron-fit-behavior](https://github.com/PolymerElements/iron-fit-behavior/tree/2.0-preview)
 * [iron-flex-layout](https://github.com/PolymerElements/iron-flex-layout/tree/2.0-preview)
-* [iron-form](https://github.com/PolymerElements/iron-form/tree/2.0-preview)
-* [iron-form-element-behavior](https://github.com/PolymerElements/iron-form-element-behavior/tree/2.0-preview)
 * [iron-icon](https://github.com/PolymerElements/iron-icon/tree/2.0-preview)
 * [iron-icons](https://github.com/PolymerElements/iron-icons/tree/2.0-preview)
 * [iron-iconset](https://github.com/PolymerElements/iron-iconset/tree/2.0-preview)
