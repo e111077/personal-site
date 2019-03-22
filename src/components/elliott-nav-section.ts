@@ -1,5 +1,5 @@
 import { customElement, LitElement, html, css, property } from "lit-element";
-import { VIEWS } from "./constants";
+import { VIEWS } from "../constants";
 
 @customElement('elliott-nav-section')
 class ElliottNavSection extends LitElement {
@@ -96,8 +96,8 @@ class ElliottNavSection extends LitElement {
           <a href="https://github.com/e111077"><img src="../assets/img/github-logo.svg"></a>
         </span>
         <span id="button-wrapper">
-          <a href="/about"><button ?selected=${selected.about}>About</button></a>
-          <a href="/blog"><button ?selected=${selected.stuff}>Stuff</button></a>
+          <a href="/"><button ?selected=${selected.about}>About</button></a>
+          <a href="/portfolio"><button ?selected=${selected.stuff}>Stuff</button></a>
         </span>
       </header>
     `;

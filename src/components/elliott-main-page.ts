@@ -1,8 +1,8 @@
 import {LitElement, customElement, html, css, property, TemplateResult} from 'lit-element';
 import {installRouter} from 'pwa-helpers';
 
-import {VIEWS} from './constants.js'
-import { homeView } from './articles/elliott-home-view.js';
+import {VIEWS} from '../constants.js'
+import { homeView } from '../articles/elliott-home-view.js';
 
 import './elliott-header-bar.js';
 import "./elliott-nav-section";
@@ -65,7 +65,8 @@ class ElliottMainPage extends LitElement {
         font-style: normal;
         font-variant: normal;
         font-weight: 500;
-        line-height: 23px;
+        line-height: normal;
+        margin-bottom: 0px;
       }
 
       .article h1 {
@@ -105,6 +106,7 @@ class ElliottMainPage extends LitElement {
         font-size: 18px;
         font-variant: normal;
         font-weight: 400;
+        line-height: 25px;
       }
     `;
   }
