@@ -11,7 +11,7 @@ class ElliottHeaderBar extends LitElement {
   static get styles() {
     return css`
       #header {
-        font-family: var(--main-font);
+        font-family: var(--header-font);
         font-size: 48px;
         position: relative;
         background-color: black;

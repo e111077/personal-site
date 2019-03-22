@@ -1,3 +1,4 @@
 export enum VIEWS {
-  HOME
+  HOME = "/",
+  PORTFOLIO = "/portfolio",
 }

@@ -30,7 +30,7 @@ class ElliottNavSection extends LitElement {
       }
 
       button {
-        font-family: var(--main-font);
+        font-family: var(--header-font);
         border: solid 1px black;
         background-color: white;
         color: black;
@@ -70,25 +70,14 @@ class ElliottNavSection extends LitElement {
     `;
   }
   render() {
-    let selected = {
-      about: false,
-      stuff: false
-    }
-
-    switch (this.view) {
-      case VIEWS.HOME:
-        selected.about = true;
-        break;
-      default:
-        selected.about = true;
-        break;
-    }
-
     return html`
       <header>
         <span>
-          <a href="/">
-            <img id="avatar" src="../assets/img/avatar-circle.png" alt="my face">
+          <a href=${VIEWS.HOME}>
+            <picture alt="my face">
+              <source type="image/webp" srcset="../assets/img/avatar-circle-sized.webp">
+              <img id="avatar" src="../assets/img/avatar-circle-sized.png" alt="my face"/>
+            </picture>
           </a>
         </span>
         <span id="social-wrapper">
@@ -96,8 +85,12 @@ class ElliottNavSection extends LitElement {
           <a href="https://github.com/e111077"><img src="../assets/img/github-logo.svg"></a>
         </span>
         <span id="button-wrapper">
-          <a href="/"><button ?selected=${selected.about}>About</button></a>
-          <a href="/portfolio"><button ?selected=${selected.stuff}>Stuff</button></a>
+          <a href=${VIEWS.HOME}>
+            <button ?selected=${this.view === VIEWS.HOME}>About</button>
+          </a>
+          <a href=${VIEWS.PORTFOLIO}>
+            <button ?selected=${this.view === VIEWS.PORTFOLIO}>Stuff</button>
+          </a>
         </span>
       </header>
     `;
