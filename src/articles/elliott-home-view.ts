@@ -6,10 +6,11 @@ export const homeView = html`
     from South Texas but now
   </p>
   <p>
-    ☀️🌉
+    🌞🌉
     <a href="http://colors.findthedata.com/l/923/International-Orange-Golden-Gate-Bridge">San Francisco</a>
-    🌉☀️
+    🌉🌞
   </p>
+  <p>Also, the "Comic Sans" is actually my handwriting.</p>
 
   <h2>What do I do?</h2>
   <p>

@@ -81,8 +81,12 @@ class ElliottNavSection extends LitElement {
           </a>
         </span>
         <span id="social-wrapper">
-          <a href="https://twitter.com/Elliott_Marquez"><img src="../assets/img/twitter-logo.svg"></a>
-          <a href="https://github.com/e111077"><img src="../assets/img/github-logo.svg"></a>
+          <a href="https://twitter.com/Elliott_Marquez">
+            <img alt="Twitter" src="../assets/img/twitter-logo.svg">
+          </a>
+          <a href="https://github.com/e111077">
+            <img alt="github" src="../assets/img/github-logo.svg">
+          </a>
         </span>
         <span id="button-wrapper">
           <a href=${VIEWS.HOME}>
