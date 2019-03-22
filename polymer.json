@@ -1,6 +1,6 @@
 {
   "entrypoint": "index.html",
-  "shell": "src/elliott-main-page.html",
+  "shell": "src/elliott-main-page.js",
   "builds": [
     {
       "js": {
@@ -29,7 +29,7 @@
   ],
   "lint": {
     "rules": [
-      "polymer-2"
+      "polymer-3"
     ]
   }
 }
