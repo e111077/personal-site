@@ -4,11 +4,20 @@ import { customElement, LitElement, html, css } from "lit-element";
 class ElliottPortfolio extends LitElement {
   static get styles() {
     return css`
-      :host(*) {
-        display: block;
+      :host(*), {
         font-family: var(--main-font);
         font-size: 18px;
         width: 88%;
+      }
+      /* new rule for shady dom bug workaround */
+      :host, p, a {
+        font-family: var(--main-font);
+        font-size: 18px;
+        width: 88%;
+      }
+
+      :host {
+        display: block;
         margin: 0 auto;
       }
 

@@ -1,8 +1,9 @@
 {
   "entrypoint": "index.html",
-  "shell": "src/elliott-main-page.js",
+  "shell": "lib/components/elliott-main-page.js",
   "builds": [
     {
+      "name": "default",
       "js": {
         "minify": true,
         "compile": false
@@ -13,19 +14,32 @@
       "html": {
         "minify": true
       },
-      "bundle": false,
+      "bundle": true,
+      "addServiceWorker": true
+    },
+    {
+      "name": "fallback",
+      "js": {
+        "minify": true,
+        "compile": true
+      },
+      "css": {
+        "minify": true
+      },
+      "html": {
+        "minify": true
+      },
+      "bundle": true,
       "addServiceWorker": true
     }
   ],
   "fragments": [],
   "sources": [
     "assets/**/**",
-    "posts/**"
+    "polyfills/**/**"
   ],
   "extraDependencies": [
-    "manifest.json",
-    "bower_components/webcomponentsjs/webcomponents-lite.js",
-    "bower_components/webcomponentsjs/webcomponents-lite.js.map"
+    "manifest.json"
   ],
   "lint": {
     "rules": [
