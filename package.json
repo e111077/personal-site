@@ -5,11 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc && polymer build && cp -a build/fallback/lib/. build/default/fallback && rm -rf build/fallback && npm run clean-export",
+    "build": "tsc && polymer build && cp -a build/fallback/lib/. build/default/fallback && rm -rf build/fallback",
     "dev": "tsc --watch & polymer serve --npm -o",
     "serveprod": "firebase serve -o 0.0.0.0",
-    "deploy": "npm run build && firebase deploy",
-    "clean-export": "sed -i '.bak' 's/export{.*$//' build/default/fallback/components/elliott-main-page.js && rm build/default/fallback/components/elliott-main-page.js.bak"
+    "deploy": "npm run build && firebase deploy"
   },
   "author": "me@elliottmarquez.dev",
   "license": "MIT",
