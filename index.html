@@ -41,19 +41,20 @@
     }
   </style>
   <script nomodule>
-    document.write('<!-- IE doesn\'t support this');
-    window.doesNotSupportModules = true;
-  </script>
-  <script src="https://unpkg.com/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-  <script type="module" src="/lib/components/elliott-main-page.js"></script>
-  <!--! do not remove for IE11 -->
-  <script>
-    if (!window.doesNotSupportModules) {
-      document.write('<!-- only for IE');
-    }
-  </script>
+      document.write('<!-- IE doesn\'t support this');
+      window.doesNotSupportModules = true;
+    </script>
+    <script src="https://unpkg.com/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script type="module" src="/lib/components/elliott-main-page.js"></script>
+    <!--! do not remove for IE11 -->
+    <script>
+      if (!window.doesNotSupportModules) {
+        document.write('<!-- only for IE');
+      }
+    </script>
   <script type="application/javascript" src="/polyfills/polyfills.js"></script>
   <script type="application/javascript" src="https://unpkg.com/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script>
+  <script type="application/javascript" src="https://unpkg.com/@polymer/esm-amd-loader"></script>
   <script type="application/javascript" src="https://unpkg.com/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
   <script type="application/javascript" src="/fallback/components/elliott-main-page.js"></script>
   <!--! do not remove for IE11 -->

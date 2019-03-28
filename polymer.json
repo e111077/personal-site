@@ -21,7 +21,8 @@
       "name": "fallback",
       "js": {
         "minify": true,
-        "compile": true
+        "compile": true,
+        "transformModulesToAmd": true
       },
       "css": {
         "minify": true
