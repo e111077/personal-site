@@ -1,23 +1,16 @@
 {
-  "name": "personal-site",
+  "name": "@example/starter",
   "version": "0.0.1",
-  "description": "Elliott's Personal Website",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc && polymer build && cp -a build/fallback/lib/. build/default/fallback && rm -rf build/fallback",
-    "dev": "tsc --watch & polymer serve --npm -o",
-    "serveprod": "firebase serve -o 0.0.0.0",
-    "deploy": "npm run build && firebase deploy"
+    "start": "astro dev",
+    "build": "astro build"
   },
-  "author": "me@elliottmarquez.dev",
-  "license": "MIT",
   "devDependencies": {
-    "@types/redux": "^3.6.0",
-    "typescript": "^3.3.4000"
+    "@astrojs/renderer-lit": "^0.1.0",
+    "astro": "^0.18.13"
   },
   "dependencies": {
-    "lit-element": "^2.1.0",
-    "pwa-helpers": "^0.9.1"
+    "lit": "*"
   }
 }
