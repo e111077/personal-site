@@ -1,14 +1,16 @@
 ---
-view: /portfolio
-backHref: /
 layout: ../layouts/Shell.astro
+metaTitle: Elliott Marquez - About
+metaDescription: About Elliott Marquez
+metaImage: /assets/img/avatar-square.png
 ---
+
 # What stuff do I do?
 
 Currently I'm a part of Google's [Lit Team](https://lit.dev) &
 [Material Design](https://material.io) Web team. I do everything from
 creating and maintaining our open sourced
-[Material Web Components components](https://github.com/material-components/material-web)
+[Material Web Components](https://github.com/material-components/material-web)
 to running the Twitter account! 🐦
 
 ## YouTube

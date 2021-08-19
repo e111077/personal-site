@@ -1,7 +1,10 @@
 ---
-view: /
 layout: ../layouts/Shell.astro
+metaTitle: Elliott Marquez
+metaDescription: Elliott's Personal website
+metaImage: /assets/img/avatar-square.png
 ---
+
 # Who am I
 
 Howdy there, I'm Elliott, a ${'{age}'} year-old Software Engineer

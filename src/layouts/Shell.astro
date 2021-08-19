@@ -2,7 +2,13 @@
 import Nav from '../components/Nav';
 import Header from '../components/Header';
 
-const {view, backHref} = Astro.props.content;
+let {metaTitle, metaDescription, metaImage} = Astro.props.content;
+const view = `/${Astro.site.pathname.split('/')[0] ?? ''}`;
+let backHref = '';
+if (view !== '/') {
+  backHref = '/' + Astro.site.pathname.split('/').slice(0, -1).join('/');
+}
+const location = Astro.site;
 ---
 
 
@@ -17,12 +23,17 @@ const {view, backHref} = Astro.props.content;
    | |_____ | | | | | | \ \___/ /   | |  | |     | |       | |  __
    |______/ |_/ |_/ |_/  \_____/    |_/  |_/     |_/       |_/ |_/
   -->
-  <title>Elliott Marquez</title>
+  <title>{metaTitle}</title>
 
   <meta name="theme-color" content="#000000">
   <meta name="msapplication-navbutton-color" content="#000000">
   <meta name="apple-mobile-web-app-status-bar-style" content="#000000">
+  <meta name="robots" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  {metaTitle ? <meta property="og:title" content={metaTitle}> : null}
+  {metaDescription ? <meta name="description" content={metaDescription}> : null}
+  {metaDescription ? <meta property="og:description" content={metaDescription}> : null}
+  <meta property="og:url" content={location}>
   <link rel="icon" type="image/ico" href="/assets/img/favicon.ico?v=1">
 
   <link rel="stylesheet" href="/styles/root-styles.css">
