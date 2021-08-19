@@ -2,7 +2,7 @@
 // Component Imports
 import Tour from '../components/Tour.astro';
 import '../components/my-element.ts'
-import {array, bool} from '../lit-astro-helpers/bindings';
+import {bind} from '../lit-astro-helpers/bindings';
 // You can import components from any supported Framework here!
 
 
@@ -57,8 +57,8 @@ let bool2 = true;
            - See https://docs.astro.build/core-concepts/component-hydration/
            -->
 
-    <my-element client:visible name={array(title)} bool={bool(bool1)}></my-element>
-    <my-element client:visible name="[1,2,3,4,5]" bool={bool(bool2)}></my-element>
+    <my-element client:visible name={bind(title)} disabled={true} {...{bool: bind(false)}}></my-element>
+    <my-element client:visible name="[1,2,3,4,5]" bool={bind(bool2)}></my-element>
     </main>
 
 </body>

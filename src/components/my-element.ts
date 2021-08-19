@@ -1,5 +1,6 @@
 import {LitElement, html} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
+import {converter} from '../lit-astro-helpers/converter';
 
 export const tagName = 'my-element';
 
@@ -8,7 +9,7 @@ export class MyElement extends LitElement {
   @property({type: Array})
   name = [1,2,3];
 
-  @property({type: Boolean})
+  @property({type: Boolean, converter, reflect: true})
   bool = false;
 
   render() {
