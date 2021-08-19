@@ -1,0 +1,21 @@
+@font-face {
+  font-family: ElliScript;
+  src: url(/assets/ElliScript.ttf);
+}
+body {
+  margin: 0;
+  padding: 0;
+  max-width: 100vw;
+  overflow-x: hidden;
+
+  --header-font: ElliScript, Apple Symbols, BlinkMacSystemFont,
+      "Google Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --main-font: "Google Sans", Apple Symbols, BlinkMacSystemFont,
+      "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --IntlOrange: #C0362C;
+}
+
+.elliscript {
+  font-family: var(--header-font);
+}

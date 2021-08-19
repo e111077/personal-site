@@ -1,0 +1,36 @@
+---
+const {href, selected} = Astro.props;
+---
+<style>
+  button {
+    font-family: var(--header-font);
+    border: solid 1px black;
+    background-color: white;
+    color: black;
+    font-size: 2em;
+    text-align: center;
+    height: 48px;
+    width: 85px;
+    padding: 8px;
+    margin: .15em 0em .15em 0em;
+  }
+
+  button[selected], button:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    cursor: hand;
+  }
+
+  @media (max-width: 600px) {
+    button {
+      margin: 0em .15em 0em .15em;
+    }
+  }
+</style>
+<a href={href}>
+  {selected ?
+   <button selected><slot/></button> :
+   <button ><slot/></button>
+  }
+</a>

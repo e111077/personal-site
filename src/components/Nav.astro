@@ -1,0 +1,63 @@
+---
+import NavButton from './NavButton.astro';
+const {view} = Astro.props;
+---
+<style>
+  header {
+    margin-right: 2em;
+  }
+
+  #social-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  #social-wrapper img {
+    height: 30px;
+    width: 30px;
+    margin: 0 .15em 0 .15em;
+  }
+
+  header, #button-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #avatar {
+    height: 150px;
+    width: 150px;
+  }
+
+  @media (max-width: 600px) {
+    #button-wrapper {
+      flex-direction: row;
+    }
+
+    header {
+      margin-right: 0;
+    }
+  }
+</style>
+<header>
+  <span>
+    <a href="/">
+      <picture alt="my face">
+        <source type="image/webp" srcset="/assets/img/avatar-circle-sized.webp">
+        <img id="avatar" src="/assets/img/avatar-circle-sized.png" alt="my face"/>
+      </picture>
+    </a>
+  </span>
+  <span id="social-wrapper">
+    <a href="https://twitter.com/techytacos">
+      <img alt="Twitter" src="/assets/img/twitter-logo.svg">
+    </a>
+    <a href="https://github.com/e111077">
+      <img alt="github" src="/assets/img/github-logo.svg">
+    </a>
+  </span>
+  <span id="button-wrapper">
+    <NavButton href="/" selected={view === '/'}>About</NavButton>
+    <NavButton href="/portfolio" selected={view === '/portfolio'}>Stuff</NavButton>
+  </span>
+</header>

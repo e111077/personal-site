@@ -1,0 +1,61 @@
+---
+import Nav from '../components/Nav';
+import Header from '../components/Header';
+
+const {view, backHref} = Astro.props.content;
+---
+
+
+<html lang="en">
+
+<head>
+  <!--
+    _______  _   _   __   _____      _    _       ____   ____
+   | _____/ | | | | |_/  / ___ \    | |  | |     /  _ \ / _  \
+   | |___   | | | |  _  / /   \ \ __| |__| |__   | | \ V / | |
+   | ___/   | | | | | | | |   | | \_  ___  __/   | |  \_/  | |
+   | |_____ | | | | | | \ \___/ /   | |  | |     | |       | |  __
+   |______/ |_/ |_/ |_/  \_____/    |_/  |_/     |_/       |_/ |_/
+  -->
+  <title>Elliott Marquez</title>
+
+  <meta name="theme-color" content="#000000">
+  <meta name="msapplication-navbutton-color" content="#000000">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#000000">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/ico" href="/assets/img/favicon.ico?v=1">
+
+  <link rel="stylesheet" href="/styles/root-styles.css">
+  <link rel="stylesheet" href="/styles/article-styles.css" global>
+  <style>
+    #body-wrapper {
+      width: 80%;
+      margin: 0 auto;
+      display: flex;
+    }
+
+    #body {
+      flex-grow: 1;
+    }
+
+    @media (max-width: 600px) {
+      #body-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 95%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <Header backHref={backHref}>Elliott Marquez</Header>
+  <div id="body-wrapper">
+    <Nav view={view} />
+    <div id="body">
+      <div class="article">
+        <slot></slot>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
