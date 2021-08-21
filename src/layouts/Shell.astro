@@ -3,12 +3,12 @@ import Nav from '../components/Nav';
 import Header from '../components/Header';
 
 let {metaTitle, metaDescription, metaImage} = Astro.props.content;
-const view = `/${Astro.site.pathname.split('/')[0] ?? ''}`;
+const view = `/${Astro.request.url.pathname.split('/')[1] ?? ''}`;
 let backHref = '';
 if (view !== '/') {
-  backHref = '/' + Astro.site.pathname.split('/').slice(0, -1).join('/');
+  backHref = '/' + Astro.request.url.pathname.split('/').slice(0, -1).join('/');
 }
-const location = Astro.site;
+const location = Astro.request.url;
 ---
 
 

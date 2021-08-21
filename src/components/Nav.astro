@@ -7,6 +7,10 @@ const {view} = Astro.props;
     margin-right: 2em;
   }
 
+  header > * {
+    margin: 4px 0;
+  }
+
   #social-wrapper {
     display: flex;
     justify-content: center;
@@ -16,6 +20,20 @@ const {view} = Astro.props;
     height: 30px;
     width: 30px;
     margin: 0 .15em 0 .15em;
+  }
+
+  #social-wrapper a {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  picture img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
   }
 
   header, #button-wrapper {
@@ -43,8 +61,8 @@ const {view} = Astro.props;
   <span>
     <a href="/">
       <picture alt="my face">
-        <source type="image/webp" srcset="/assets/img/avatar-circle-sized.webp">
-        <img id="avatar" src="/assets/img/avatar-circle-sized.png" alt="my face"/>
+        <source type="image/webp" srcset="/assets/img/avatar-square-300.webp" media="(-webkit-min-device-pixel-ratio: 2)">
+        <img type="image/webp" srcset="/assets/img/avatar-square-150.webp" alt="my face">
       </picture>
     </a>
   </span>
