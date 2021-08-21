@@ -2,13 +2,21 @@
 import Nav from '../components/Nav';
 import Header from '../components/Header';
 
-let {metaTitle, metaDescription, metaImage} = Astro.props.content;
+let {metaTitle, metaDescription, metaImage} = Astro.props.content ?? {
+  metaTitle: undefined,
+  metaDescription: undefined,
+  metaImage: undefined,
+};
+
 const view = `/${Astro.request.url.pathname.split('/')[1] ?? ''}`;
 let backHref = '';
 if (view !== '/') {
-  backHref = '/' + Astro.request.url.pathname.split('/').slice(0, -1).join('/');
+  backHref = '/' + Astro.request.url.pathname.split('/').slice(0, -1).join('');
 }
 const location = Astro.request.url;
+if (metaImage) {
+  metaImage = `${Astro.site}${metaImage}`
+}
 ---
 
 
@@ -28,11 +36,11 @@ const location = Astro.request.url;
   <meta name="theme-color" content="#000000">
   <meta name="msapplication-navbutton-color" content="#000000">
   <meta name="apple-mobile-web-app-status-bar-style" content="#000000">
-  <meta name="robots" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {metaTitle ? <meta property="og:title" content={metaTitle}> : null}
   {metaDescription ? <meta name="description" content={metaDescription}> : null}
   {metaDescription ? <meta property="og:description" content={metaDescription}> : null}
+  {metaImage ? <meta property="og:image" content={metaImage}> : null}
   <meta property="og:url" content={location}>
   <link rel="icon" type="image/ico" href="/assets/img/favicon.ico?v=1">
 
@@ -43,6 +51,20 @@ const location = Astro.request.url;
       width: 80%;
       margin: 0 auto;
       display: flex;
+    }
+
+    #body-background {
+      top: 80px;
+      position: absolute;
+      inset-inline-start: 0;
+      inset-inline-end: 0;
+      z-index: 2;
+      background-color: var(--primary-color);
+    }
+
+    #body-sheet {
+      background-color: var(--surface-color);
+      border-radius: 16px 16px 0 0;
     }
 
     #body {
@@ -60,11 +82,15 @@ const location = Astro.request.url;
 </head>
 <body>
   <Header backHref={backHref}>Elliott Marquez</Header>
-  <div id="body-wrapper">
-    <Nav view={view} />
-    <div id="body">
-      <div class="article">
-        <slot></slot>
+  <div id="body-background">
+    <div id="body-sheet">
+      <div id="body-wrapper">
+        <Nav view={view} />
+        <div id="body">
+          <div class="article">
+            <slot></slot>
+          </div>
+        </div>
       </div>
     </div>
   </div>

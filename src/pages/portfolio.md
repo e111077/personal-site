@@ -2,7 +2,7 @@
 layout: ../layouts/Shell.astro
 metaTitle: Elliott Marquez - About
 metaDescription: About Elliott Marquez
-metaImage: /assets/img/avatar-square.png
+metaImage: /assets/img/avatar-square.jpg
 ---
 
 # What stuff do I do?
@@ -13,6 +13,13 @@ creating and maintaining our open sourced
 [Material Web Components](https://github.com/material-components/material-web)
 to running the Twitter account! 🐦
 
+## Material Web Components
+
+I helped start and for a while managed the
+[Material Design Web Components library](https://github.com/material-components/material-web)
+which is the canonical implementation of Material Design on the web that uses
+Lit Web Components.
+
 ## YouTube
 
 For a long time I helped convert YouTube from their legacy framework to
@@ -22,6 +29,8 @@ their frontend properties.
 
 (Hello dark mode 🌚)
 
+## Component 64
+https://litcds2020.dev/
 ## Polymon
 
 For Google I/O '17 I worked with others making everyone's favorite

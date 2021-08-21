@@ -1,3 +1,7 @@
+.article {
+  color: var(--on-surface-color);
+}
+
 .article h1, .article h2, .article h3 {
   font-family: var(--header-font);
   font-style: normal;
@@ -9,6 +13,7 @@
 
 .article h1 {
   font-size: 3em;
+  margin-top: 36px;
 }
 
 .article h2 {
@@ -29,7 +34,7 @@
 }
 
 .article a {
-  color: var(--IntlOrange);
+  color: var(--secondary-color);
   text-decoration: none;
 }
 
