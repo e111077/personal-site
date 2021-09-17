@@ -1,0 +1,21 @@
+---
+import {Markdown} from 'astro/components';
+import Shell from '../../layouts/Shell.astro';
+import '../../components/my-element.js';
+
+const layout = '../../layouts/Shell.astro';
+const title = 'Hello World';
+const metaTitle = 'Hello World';
+const metaDescription = 'First Blog post';
+const metaImage = '/assets/img/avatar-square.jpg';
+---
+
+<Shell content={metaTitle, metaDescription, metaImage}>
+<Markdown>
+# Hello World
+
+Hello from markdown!
+
+This is a component: <my-element client:idle></my-element>
+</Markdown>
+</Shell>

@@ -24,6 +24,11 @@ body {
   --secondary-color-l: 46%;
   --secondary-color: hsl(var(--secondary-color-h), var(--secondary-color-s), var(--secondary-color-l));
 
+  --on-secondary-color-h: 0;
+  --on-secondary-color-s: 0%;
+  --on-secondary-color-l: 100%;
+  --on-secondary-color: hsl(var(--on-secondary-color-h), var(--on-secondary-color-s), var(--on-secondary-color-l));
+
   --primary-color-h: 0;
   --primary-color-s: 0%;
   --primary-color-l: 0%;
@@ -45,6 +50,12 @@ body {
   --on-surface-color: hsl(var(--on-surface-color-h), var(--on-surface-color-s), var(--on-surface-color-l));
 }
 
+::selection {
+  background-color: var(--secondary-color);
+  color: var(--on-secondary-color);
+  border: 1px solid var(--secondary-color);
+}
+
 .elliscript {
   font-family: var(--header-font);
 }
@@ -58,6 +69,10 @@ body {
     --secondary-color-h: 1;
     --secondary-color-s: 62%;
     --secondary-color-l: 78%;
+
+    --on-secondary-color-h: 0;
+    --on-secondary-color-s: 0%;
+    --on-secondary-color-l: 0%;
 
     --surface-color-h: 0;
     --surface-color-s: 0%;
