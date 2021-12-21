@@ -7,11 +7,7 @@ metaImage: /assets/img/avatar-square.jpg
 
 # What stuff do I do?
 
-Currently I'm a part of Google's [Lit Team](https://lit.dev) &
-[Material Design](https://material.io) Web team. I do everything from
-creating and maintaining our open sourced
-[Material Web Components](https://github.com/material-components/material-web)
-to running the Twitter account! 🐦
+Currently I'm a part of Google's [Lit Team](https://lit.dev). I also run the Twitter account! 🐦
 
 ## Material Web Components
 

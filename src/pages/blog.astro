@@ -6,9 +6,7 @@ const metaTitle = 'Elliott Marquez - Blog';
 const metaDescription = `Directory of Elliott's blog`;
 const metaImage = '/assets/img/avatar-square.jpg';
 
-const posts = [
-  {title: 'Hello World', url: './001'}
-];
+const posts = Astro.fetchContent('./blog/*.md');
 ---
 
 <Shell content={metaTitle, metaDescription, metaImage}>
