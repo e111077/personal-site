@@ -48,6 +48,8 @@ body {
   --on-surface-color-s: 0%;
   --on-surface-color-l: 0%;
   --on-surface-color: hsl(var(--on-surface-color-h), var(--on-surface-color-s), var(--on-surface-color-l));
+
+  --header-height: 80px;
 }
 
 ::selection {
