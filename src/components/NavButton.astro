@@ -1,0 +1,64 @@
+---
+const {href, selected} = Astro.props;
+---
+<style>
+  a {
+    --padding: 4px;
+    --border-width: 4px;
+    position: relative;
+    text-decoration: none;
+    font-family: var(--header-font);
+    border: solid var(--border-width) var(--on-surface-color);
+    background-color: var(--surface-color);
+    color: var(--on-surface-color);
+    border-radius: 12px;
+    font-size: 2em;
+    text-align: center;
+    height: calc(48px - calc(2 * (var(--padding) + var(--border-width))));
+    width: 85px;
+    padding: var(--padding);
+    margin: 4px 0;
+    transition: color .2s cubic-bezier(.4,0,.2,1), background-color .2s cubic-bezier(.4,0,.2,1);
+    outline: none;
+  }
+
+  a:not([selected]):hover {
+    cursor: pointer;
+    cursor: hand;
+    color: hsl(var(--on-surface-color-h),var(--on-surface-color-s), calc(var(--on-surface-color-l) + 6%));
+    background-color: hsl(var(--surface-color-h),var(--surface-color-s), calc(var(--surface-color-l) - 6%));
+  }
+
+  a:not([selected]):active,
+  a:not([selected]):focus {
+    color: hsl(var(--on-surface-color-h),var(--on-surface-color-s), calc(var(--on-surface-color-l) + 12%));
+    background-color: hsl(var(--surface-color-h),var(--surface-color-s), calc(var(--surface-color-l) - 12%));
+  }
+
+  a:not([selected]):focus-visible::before,
+  a:not([selected]):active::before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    padding: 2px;
+    margin: -4px;
+    inset: calc((-1 * var(--border-width)));
+    border-radius: 12px;
+    border: solid calc(var(--border-width) / 2) var(--on-surface-color);
+  }
+
+  a[selected] {
+    background-color: var(--primary-color);
+    color: var(--on-primary-color);
+  }
+
+  @media (max-width: 600px) {
+    a {
+      margin: 4px;
+    }
+  }
+</style>
+{selected ?
+  <a role="button" href={href} selected tabindex="-1"><slot/></a> :
+  <a role="button" href={href}><slot/></a>
+}

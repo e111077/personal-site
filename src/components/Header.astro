@@ -1,0 +1,39 @@
+---
+const {backHref} = Astro.props;
+---
+
+<style>
+  #header {
+    font-family: var(--header-font);
+    font-size: 48px;
+    position: fixed;
+    inset-inline-start: 0;
+    inset-inline-end: 0;
+    z-index: 1;
+    background-color: var(--primary-color);
+    padding: 14px 0 14px 0;
+    text-align: center;
+    display: block;
+    box-sizing: border-box;
+    min-height: var(--header-height);
+  }
+
+  a {
+    color: var(--on-primary-color);
+    text-decoration: none;
+  }
+
+  #name:hover {
+    text-decoration: underline;
+  }
+
+  #backButton {
+    position: absolute;
+    left: 0;
+    margin-left: 24px;
+  }
+</style>
+<header id="header">
+  {backHref ? <a id="backButton" href={backHref}>&lt;</a> : null}
+  <a id="name" class="elliscript" href="/"><slot/></a>
+</header>
