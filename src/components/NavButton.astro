@@ -35,7 +35,7 @@ const {href, selected} = Astro.props;
     background-color: hsl(var(--surface-color-h),var(--surface-color-s), calc(var(--surface-color-l) - 12%));
   }
 
-  a:not([selected]):focus::before,
+  a:not([selected]):focus-visible::before,
   a:not([selected]):active::before {
     content: '';
     box-sizing: border-box;

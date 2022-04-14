@@ -6,11 +6,11 @@ const metaTitle = 'Elliott Marquez - Blog';
 const metaDescription = `Directory of Elliott's blog`;
 const metaImage = '/assets/img/avatar-square.jpg';
 
-const posts = Astro.fetchContent('./blog/*.md');
+const posts = await Astro.glob('./blog/*.md');
 ---
 
-<Shell content={metaTitle, metaDescription, metaImage}>
+<Shell content={{metaTitle, metaDescription, metaImage}}>
   <nav aria-label="Blog posts">
-    {posts.map(post => <Post title={post.title} href={post.url} />)}
+    {posts.map(post => <Post title={post.frontmatter.title} href={post.url} />)}
   </nav>
 </Shell>

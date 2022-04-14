@@ -4,14 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build --experimental-static-build",
+    "build": "astro build",
     "preview": "astro preview"
   },
   "devDependencies": {
-    "@astrojs/renderer-lit": "^0.3.1",
-    "astro": "^0.22.20"
+    "@astrojs/lit": "^0.1.1",
+    "astro": "^1.0.0-beta.5"
   },
   "dependencies": {
-    "lit": "^2.1.2"
+    "lit": "^2.2.2"
   }
 }

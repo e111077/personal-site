@@ -1,13 +1,9 @@
-export default {
-  buildOptions: {
-    site: 'https://elliottmarquez.dev',
-    sitemap: true,
-  },
-  devOptions: {
-    // hostname: 'localhost',
-    // port: 3000,
-  },
-  renderers: [
-    '@astrojs/renderer-lit'
+import { defineConfig } from 'astro/config';
+import lit from '@astrojs/lit';
+
+export default defineConfig({
+  site: 'https://elliottmarquez.dev',
+  integrations: [
+    lit(),
   ],
-};
+});
